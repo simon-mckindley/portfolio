@@ -1,0 +1,104 @@
+[
+    {
+        "title": "ClanCalendar",
+        "description": "A family organiser web app for managing events and tasks.",
+        "technologies": [
+            "Lit",
+            "SASS",
+            "Node.js",
+            "Express.js",
+            "MongoDB"
+        ],
+        "link": "https://clancalendar.netlify.app/login"
+    },
+    {
+        "title": "Countries of the World",
+        "description": "A web app to organise and display information about world countries.",
+        "technologies": [
+            "HTML-5",
+            "CSS",
+            "JavaScript"
+        ],
+        "link": "https://countries-smck.netlify.app/"
+    },
+    {
+        "title": "Arcade Odyssey",
+        "description": "A website with info and animations about classic arcade games.",
+        "technologies": [
+            "HTML-5",
+            "CSS",
+            "JavaScript"
+        ],
+        "link": "https://arcadeodyssey.netlify.app/"
+    },
+    {
+        "title": "Time App",
+        "description": "A web app with world time, timer and stopwatch.",
+        "technologies": [
+            "HTML-5",
+            "CSS",
+            "JavaScript"
+        ],
+        "link": "https://time-smck.netlify.app/"
+    },
+    {
+        "title": "Calculator App",
+        "description": "A web app to do basic math operations.",
+        "technologies": [
+            "HTML-5",
+            "CSS",
+            "JavaScript"
+        ],
+        "link": "https://calculator-smck.netlify.app/"
+    },
+    {
+        "title": "Word Game",
+        "description": "A Wordle clone game.",
+        "technologies": [
+            "HTML-5",
+            "CSS",
+            "JavaScript"
+        ],
+        "link": "https://smwordgame.netlify.app/"
+    },
+    {
+        "title": "Smartboard",
+        "description": "A kanban board desktop app.",
+        "technologies": [
+            "Java",
+            "JavaFX",
+            "SQLite"
+        ],
+        "link": "https://github.com/simon-mckindley/SmartBoard"
+    },
+    {
+        "title": "BattleShip",
+        "description": "A battleship game web app with AI players.",
+        "technologies": [
+            "HTML-5",
+            "CSS",
+            "JavaScript",
+            "Java",
+            "Spring MVC"
+        ],
+        "link": "https://github.com/simon-mckindley/battleships"
+    },
+    {
+        "title": "My Story Teller",
+        "description": "A mobile app for parents to record and play stories for their children.",
+        "technologies": [
+            "Dart",
+            "Flutter"
+        ],
+        "link": "https://github.com/simon-mckindley/my_story_teller"
+    },
+    {
+        "title": "Ordering",
+        "description": "A web app for children to order numbers and letters.",
+        "technologies": [
+            "PHP",
+            "CSS"
+        ],
+        "link": "https://github.com/simon-mckindley/Ordering"
+    }
+]

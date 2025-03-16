@@ -1,0 +1,65 @@
+[
+    {
+        "title": "Front-End",
+        "skills": [
+            "HTML-5",
+            "CSS",
+            "SASS",
+            "React.js",
+            "Lit"
+        ]
+    },
+    {
+        "title": "Programming Languages",
+        "skills": [
+            "JavaScript",
+            "Node.js",
+            "Java",
+            "Python",
+            "C#",
+            "PHP",
+            "C++",
+            "Dart"
+        ]
+    },
+    {
+        "title": "Frameworks & Libraries",
+        "skills": [
+            "JavaFX",
+            "Spring MVC",
+            ".NET",
+            "Django",
+            "Express.js",
+            "Flutter"
+        ]
+    },
+    {
+        "title": "Databases",
+        "skills": [
+            "MySQL",
+            "SQLite",
+            "MongoDB"
+        ]
+    },
+    {
+        "title": "Cloud & DevOps",
+        "skills": [
+            "AWS",
+            "Google Cloud"
+        ]
+    },
+    {
+        "title": "Version Control",
+        "skills": [
+            "Git",
+            "BitBucket"
+        ]
+    },
+    {
+        "title": "Development Methodologies",
+        "skills": [
+            "Agile",
+            "Scrum"
+        ]
+    }
+]
