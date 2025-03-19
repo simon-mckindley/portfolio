@@ -41,9 +41,47 @@ header {
   }
 
   .sub-head {
+    position: relative;
+    text-align: end;
     font-size: 0.9rem;
-    width: max-content;
+    height: 1.2rem;
     margin-inline-start: auto;
+    transform-style: preserve-3d;
+    transition: transform 500ms;
+    animation: sub-head-scroll 30s ease-in-out infinite;
+
+    >* {
+      position: absolute;
+      right: 0;
+      width: max-content;
+      backface-visibility: hidden;
+    }
+
+    .upper {
+      transform: rotateY(0deg);
+    }
+
+    .lower {
+      transform: rotateX(-90deg) translateY(0.3rem);
+    }
+  }
+}
+
+@keyframes sub-head-scroll {
+  0%, 44.5% {
+    transform: rotateX(0deg);
+  }
+
+  49.5% {
+    transform: rotateX(90deg);
+  }
+
+  94.5% {
+    transform: rotateX(90deg);
+  }
+
+  99.5% {
+    transform: rotateX(0deg);
   }
 }
 
