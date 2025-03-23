@@ -146,6 +146,10 @@ header {
     padding-inline: 0rem;
 
     li {
+      --_delay: 100ms;
+      opacity: 0;
+      transform: translateY(100%);
+
       position: relative;
       display: flex;
       flex-wrap: wrap;
@@ -156,8 +160,34 @@ header {
       min-width: 13rem;
       background-color: var(--card-bg-color);
       box-shadow: 1px 1px 6px 0px var(--card-shadow-color);
+      animation: up-in 600ms var(--_delay) ease forwards;
     }
 
+    li:nth-child(2) {
+      --_delay: 200ms;
+    }
+
+    li:nth-child(3) {
+      --_delay: 300ms;
+    }
+
+    li:nth-child(4) {
+      --_delay: 400ms;
+    }
+
+    li:nth-child(5) {
+      --_delay: 500ms;
+    }
+
+    li:nth-child(6) {
+      --_delay: 600ms;
+    }
+
+    li:nth-child(7) {
+      --_delay: 700ms;
+    }
+
+    
     li:hover .label {
       margin-inline-start: 0.5rem;
     }
@@ -214,4 +244,17 @@ header {
 .project-card:hover {
   scale: 1.01;
   box-shadow: 1px 1px 8px 0px var(--card-shadow-color);
+}
+
+
+@keyframes up-in {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
 }
