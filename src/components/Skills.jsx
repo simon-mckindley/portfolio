@@ -6,7 +6,7 @@ const SkillsItem = ({ skillItem }) => {
         <li>
             <span className="label">{skillItem.title}</span>
             {skillItem.skills.map((skill, index) => (
-                <span className="skill-tab" key={index}>{skill}</span>
+                <span className="skill-tab" id={skill} key={index}>{skill}</span>
             ))}
         </li>
     );

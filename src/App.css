@@ -4,12 +4,28 @@
 }
 
 html {
-  --text-color: #0f0f0f;
+  --bg-color: #ffffe3;
+  --text-color: #222f3a;
   --alt-text-color: #f0f0f0;
   --card-bg-color: #e9eaee;
+  --card-shadow-color: #222f3a;
+  --highlight: #0000ff;
+  --highlight-hover: #4444ff;
+}
+
+.dark {
+  --bg-color: #222f3a;
+  --text-color: #f0f0f0;
+  --alt-text-color: #0f0f0f;
+  --card-bg-color: #9393fa;
   --card-shadow-color: #0f0f0f;
   --highlight: #0000ff;
   --highlight-hover: #4444ff;
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
 
 
@@ -24,6 +40,26 @@ html {
 /* Main */
 header, main {
   padding-inline: 1rem;
+}
+
+
+/* Theme Button */
+
+.theme-button {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.25rem;
+  border: 2px solid var(--card-bg-color);
+  border-radius: 0.5rem;
+  background-color: var(--card-bg-color);
+  color: var(--alt-text-color);
+  cursor: pointer;
+  transition: border-color 300ms;
+
+  &:hover {
+    border-color: var(--highlight-hover);
+  }
 }
 
 
@@ -187,7 +223,7 @@ header {
       --_delay: 700ms;
     }
 
-    
+
     li:hover .label {
       margin-inline-start: 0.5rem;
     }
@@ -227,6 +263,8 @@ header {
 
   h4 {
     font-size: 17px;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
   }
 
   .project-tech {
