@@ -117,5 +117,14 @@
             "C++"
         ],
         "link": "https://github.com/simon-mckindley/qwirkle-game"
+    },
+    {
+        "title": "Portfolio Website (this site)",
+        "description": "A personal portfolio website.",
+        "technologies": [
+            "React.js",
+            "CSS"
+        ],
+        "link": "https://github.com/simon-mckindley/portfolio"
     }
 ]

@@ -19,8 +19,6 @@
   --alt-text-color: #0f0f0f;
   --card-bg-color: #9393fa;
   --card-shadow-color: #0f0f0f;
-  --highlight: #0000ff;
-  --highlight-hover: #4444ff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,8 +28,6 @@
     --alt-text-color: #0f0f0f;
     --card-bg-color: #9393fa;
     --card-shadow-color: #0f0f0f;
-    --highlight: #0000ff;
-    --highlight-hover: #4444ff;
   }
 }
 
@@ -264,6 +260,9 @@ header {
 }
 
 .project-card {
+  opacity: 0;
+  transform: translateY(100%);
+  
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
@@ -271,6 +270,7 @@ header {
   background-color: var(--card-bg-color);
   box-shadow: 1px 1px 6px 0px var(--card-shadow-color);
   transition: scale 300ms;
+  animation: up-in 600ms 600ms ease forwards;
 
   h4 {
     font-size: 17px;
