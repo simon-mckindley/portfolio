@@ -3,7 +3,7 @@
   src: url('./assets/fonts/JetBrainsMono/JetBrainsMono-Bold.ttf') format('truetype');
 }
 
-html {
+:root {
   --bg-color: #ffffe3;
   --text-color: #222f3a;
   --alt-text-color: #f0f0f0;
@@ -21,6 +21,18 @@ html {
   --card-shadow-color: #0f0f0f;
   --highlight: #0000ff;
   --highlight-hover: #4444ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #222f3a;
+    --text-color: #f0f0f0;
+    --alt-text-color: #0f0f0f;
+    --card-bg-color: #9393fa;
+    --card-shadow-color: #0f0f0f;
+    --highlight: #0000ff;
+    --highlight-hover: #4444ff;
+  }
 }
 
 body {
@@ -44,7 +56,6 @@ header, main {
 
 
 /* Theme Button */
-
 .theme-button {
   position: fixed;
   top: 1rem;
