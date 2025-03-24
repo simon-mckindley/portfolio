@@ -33,16 +33,21 @@ export default function ProjectList() {
             .catch((error) => console.error("Error fetching projects:", error));
     }, []);
 
-    if (loading) return <p><br></br>Loading projects...</p>;
+    if (loading) return (
+        <section className="projects-container">
+            <h3>Projects</h3>
+            <div className="loading">Loading projects...</div>
+        </section>
+    );
 
     return (
-        <div className="projects-container">
+        <section className="projects-container">
             <h3>Projects</h3>
             <div className="projects-grid">
                 {projects.map((project, index) => (
                     <ProjectCard key={index} project={project} />
                 ))}
             </div>
-        </div>
+        </section>
     );
 }

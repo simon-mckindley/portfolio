@@ -26,7 +26,12 @@ export default function Skills() {
             .catch((error) => console.error("Error fetching skills:", error));
     }, []);
 
-    if (loading) return <p><br></br>Loading skills...</p>;
+    if (loading) return (
+        <section className="skills">
+            <h3>Skills</h3>
+            <div className="loading">Loading skills...</div>
+        </section>
+    );
 
     return (
         <section className="skills">

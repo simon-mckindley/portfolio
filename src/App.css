@@ -179,6 +179,11 @@ header {
 /* Skills */
 .skills {
   margin-block-start: 2rem;
+  min-height: 6rem;
+
+  .loading {
+    margin-block-start: 1rem;
+  }
 
   ul {
     display: flex;
@@ -250,6 +255,11 @@ header {
 /* Projects */
 .projects-container {
   margin-block-start: 2rem;
+  min-height: 6rem;
+
+  .loading {
+    margin-block-start: 1rem;
+  }
 }
 
 .projects-grid {
@@ -262,7 +272,7 @@ header {
 .project-card {
   opacity: 0;
   transform: translateY(100%);
-  
+
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
