@@ -100,5 +100,22 @@
             "CSS"
         ],
         "link": "https://github.com/simon-mckindley/Ordering"
+    },
+    {
+        "title": "Banking Web App",
+        "description": "A web app with banking functions such as deposit, withdraw and transfer.",
+        "technologies": [
+            "C#",
+            ".NET"
+        ],
+        "link": "https://github.com/simon-mckindley/WDT_A2"
+    },
+    {
+        "title": "Qwirkle Game",
+        "description": "A console version of the Qwirkle tile game.",
+        "technologies": [
+            "C++"
+        ],
+        "link": "https://github.com/simon-mckindley/qwirkle-game"
     }
 ]
