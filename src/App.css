@@ -6,6 +6,7 @@
 :root {
   --bg-color: #ffffe3;
   --text-color: #222f3a;
+  --card-text-color: #222f3a;
   --alt-text-color: #f0f0f0;
   --card-bg-color: #e9eaee;
   --card-shadow-color: #222f3a;
@@ -61,7 +62,9 @@ header, main {
   border-radius: 0.5rem;
   background-color: var(--card-bg-color);
   color: var(--alt-text-color);
+  box-shadow: 1px 1px 6px 0px var(--card-shadow-color);
   cursor: pointer;
+  z-index: 100;
   transition: border-color 300ms;
 
   &:hover {
@@ -175,6 +178,12 @@ header {
   }
 }
 
+@media screen and (max-width: 520px) {
+  .contact-info {
+    justify-content: start;
+  }
+}
+
 
 /* Skills */
 .skills {
@@ -243,7 +252,7 @@ header {
     .label {
       position: absolute;
       top: 0rem;
-      color: var(--text-color);
+      color: var(--card-text-color);
       font-size: 0.8rem;
       font-weight: bold;
       transition: margin 300ms;
@@ -277,6 +286,7 @@ header {
   flex-direction: column;
   row-gap: 0.5rem;
   padding: 0.5rem;
+  color: var(--card-text-color);
   background-color: var(--card-bg-color);
   box-shadow: 1px 1px 6px 0px var(--card-shadow-color);
   transition: scale 300ms;
