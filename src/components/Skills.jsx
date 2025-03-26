@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
 
 
-const SkillsItem = ({ skillItem }) => {
+const SkillsItem = ({ skillItem, onSkillClick }) => {
     return (
         <li>
             <span className="label">{skillItem.title}</span>
             {skillItem.skills.map((skill, index) => (
-                <span className="skill-tab" id={skill} key={index}>{skill}</span>
+                <span
+                    className="skill-tab"
+                    title="Add filter"
+                    onClick={() => onSkillClick(skill)}
+                    id={skill}
+                    key={index}>
+                    {skill}
+                </span>
             ))}
         </li>
     );
 };
 
-export default function Skills() {
+export default function Skills({ onSkillClick }) {
     const [skillsList, setSkills] = useState([]); // State to store skillsList
     const [loading, setLoading] = useState(true); // Loading state
 
@@ -38,7 +45,11 @@ export default function Skills() {
             <h3>Skills</h3>
             <ul>
                 {skillsList.map((skillItem, index) => (
-                    <SkillsItem key={index} skillItem={skillItem} />
+                    <SkillsItem
+                        key={index}
+                        skillItem={skillItem}
+                        onSkillClick={onSkillClick}
+                    />
                 ))}
             </ul>
         </section>

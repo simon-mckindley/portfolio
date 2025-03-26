@@ -1,5 +1,4 @@
 import ModeIcon from '../assets/dark_mode.svg';
-import LightModeIcon from '../assets/light_mode.svg';
 
 export default function ThemeButton({ onClick }) {
     return (

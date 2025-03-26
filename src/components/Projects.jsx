@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import FilterItem from "./FilterItem";
 
 
 const ProjectCard = ({ project }) => {
@@ -19,9 +20,11 @@ const ProjectCard = ({ project }) => {
     );
 };
 
-export default function ProjectList() {
+
+export default function ProjectList({ filters, onFilterClick }) {
     const [projects, setProjects] = useState([]); // State to store projects
     const [loading, setLoading] = useState(true); // Loading state
+
 
     useEffect(() => {
         fetch("./data/projects.json") // Fetch from local JSON file
@@ -42,7 +45,17 @@ export default function ProjectList() {
 
     return (
         <section className="projects-container">
-            <h3>Projects</h3>
+            <div className="projects-header">
+                <h3>Projects</h3>
+                {filters.length > 0 && (
+                    <div className="filter-cont">
+                        Filters
+                        {filters.map((filter, index) => (
+                            <FilterItem key={index} itemName={filter} onFilterClick={onFilterClick} />
+                        ))}
+                    </div>
+                )}
+            </div>
             <div className="projects-grid">
                 {projects.map((project, index) => (
                     <ProjectCard key={index} project={project} />
@@ -50,4 +63,5 @@ export default function ProjectList() {
             </div>
         </section>
     );
+
 }
