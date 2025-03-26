@@ -6,14 +6,15 @@ const SkillsItem = ({ skillItem, onSkillClick }) => {
         <li>
             <span className="label">{skillItem.title}</span>
             {skillItem.skills.map((skill, index) => (
-                <span
+                <button
+                    type="button"
                     className="skill-tab"
                     title="Add filter"
                     onClick={() => onSkillClick(skill)}
                     id={skill}
                     key={index}>
                     {skill}
-                </span>
+                </button>
             ))}
         </li>
     );
@@ -41,7 +42,7 @@ export default function Skills({ onSkillClick }) {
     );
 
     return (
-        <section className="skills">
+        <section className="skills defined-section">
             <h3>Skills</h3>
             <ul>
                 {skillsList.map((skillItem, index) => (

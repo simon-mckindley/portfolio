@@ -36,6 +36,13 @@ export default function ProjectList({ filters, onFilterClick }) {
             .catch((error) => console.error("Error fetching projects:", error));
     }, []);
 
+    // Function to filter projects based on selected skills
+    const filteredProjects = filters.length === 0
+        ? projects  // No filters selected → Show all projects
+        : projects.filter(project =>
+            filters.every(filter => project.technologies.includes(filter))
+        );
+
     if (loading) return (
         <section className="projects-container">
             <h3>Projects</h3>
@@ -44,7 +51,7 @@ export default function ProjectList({ filters, onFilterClick }) {
     );
 
     return (
-        <section className="projects-container">
+        <section className="projects-container defined-section">
             <div className="projects-header">
                 <h3>Projects</h3>
                 {filters.length > 0 && (
@@ -57,7 +64,7 @@ export default function ProjectList({ filters, onFilterClick }) {
                 )}
             </div>
             <div className="projects-grid">
-                {projects.map((project, index) => (
+                {filteredProjects.map((project, index) => (
                     <ProjectCard key={index} project={project} />
                 ))}
             </div>

@@ -9,9 +9,10 @@
   --card-text-color: #222f3a;
   --alt-text-color: #f0f0f0;
   --card-bg-color: #e9eaee;
+  --section-bg-color: rgba(34, 47, 58, 0.1);
   --card-shadow-color: #222f3a;
   --highlight: #0000ff;
-  --highlight-hover: #4444ff;
+  --highlight-light: #4444ff;
 }
 
 .dark {
@@ -19,6 +20,7 @@
   --text-color: #f0f0f0;
   --alt-text-color: #0f0f0f;
   --card-bg-color: #9393fa;
+  --section-bg-color: rgba(255, 255, 227, 0.1);
   --card-shadow-color: #0f0f0f;
 }
 
@@ -28,6 +30,7 @@
     --text-color: #f0f0f0;
     --alt-text-color: #0f0f0f;
     --card-bg-color: #9393fa;
+    --section-bg-color: rgba(255, 255, 227, 0.1);
     --card-shadow-color: #0f0f0f;
   }
 }
@@ -37,12 +40,26 @@ body {
   background-color: var(--bg-color);
 }
 
+.defined-section {
+  padding: 0.5rem 1rem;
+  background-color: var(--section-bg-color);
+}
 
 .skill-tab {
   color: var(--alt-text-color);
+  font-size: 1rem;
   padding-inline: 0.5rem;
-  background-color: var(--highlight-hover);
+  padding-block: 1px;
+  background-color: var(--highlight-light);
+  transition: background-color 300ms;
+}
+
+button.skill-tab {
   cursor: pointer;
+}
+
+button.skill-tab:hover {
+  background-color: var(--highlight);
 }
 
 
@@ -68,7 +85,7 @@ header, main {
   transition: border-color 300ms;
 
   &:hover {
-    border-color: var(--highlight-hover);
+    border-color: var(--highlight-light);
   }
 }
 
@@ -171,7 +188,7 @@ header {
 }
 
 .contact-info-item:hover {
-  color: var(--highlight-hover);
+  color: var(--highlight-light);
 
   span {
     margin-inline-start: 0.5rem;
@@ -263,8 +280,8 @@ header {
 
 /* Projects */
 .projects-container {
-  margin-block-start: 2rem;
-  min-height: 6rem;
+  margin-block: 2rem;
+  min-height: 15rem;
 
   .loading {
     margin-block-start: 1rem;
@@ -339,8 +356,7 @@ header {
   display: flex;
   align-items: center;
   width: max-content;
-  border: 1px solid var(--highlight-hover);
-  border-radius: 3px;
+  border: 1px solid var(--highlight-light);
   box-shadow: 1px 1px 6px 0px var(--card-shadow-color);
   transition: background-color 300ms;
 
@@ -349,13 +365,13 @@ header {
     padding-inline: 0.5rem;
   }
 
-  img {
-    background-color: var(--highlight-hover);
-    border-radius: 3px;
+  button {
+    padding: 0;
+    background-color: var(--highlight-light);
     cursor: pointer;
   }
 
-  img:hover {
+  button:hover {
     background-color: var(--highlight);
   }
 }

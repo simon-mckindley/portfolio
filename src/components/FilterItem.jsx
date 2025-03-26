@@ -4,13 +4,13 @@ export default function FilterItem({ itemName, onFilterClick }) {
     return (
         <div className="filter-item">
             <span>{itemName}</span>
-            <img
-                src={CloseIcon}
-                id={itemName}
-                onClick={() => onFilterClick(itemName)}
-                alt="X"
+            <button
+                type="button"
                 title='Remove filter'
-            />
+                onClick={() => onFilterClick(itemName)} >
+
+                <img src={CloseIcon} alt="X" />
+            </button>
         </div>
     );
 }
