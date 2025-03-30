@@ -32,7 +32,7 @@ export default function ProjectList({ filters, onFilterClick }) {
             .then((response) => response.json())
             .then((data) => {
                 setProjects(data);
-                setFilteredProjects(data); // Initially show all projects
+                setFilteredProjects(data);
                 setLoading(false);
             })
             .catch((error) => console.error("Error fetching projects:", error));
@@ -51,7 +51,12 @@ export default function ProjectList({ filters, onFilterClick }) {
                         filters.every((filter) => project.technologies.includes(filter))
                     );
 
-            setFilteredProjects(newFilteredProjects);
+            // Sort projects alphabetically by "title"
+            const sortedProjects = newFilteredProjects.sort((a, b) =>
+                a.title.localeCompare(b.title)
+            );
+
+            setFilteredProjects(sortedProjects);
             setShowProjects(true); // Fade projects back in
         }, 300); // This should match the CSS fade-out duration
     }, [filters, projects]);
@@ -74,6 +79,7 @@ export default function ProjectList({ filters, onFilterClick }) {
                                 }
                             />
                         ))}
+                        <div className="projects-count">({filteredProjects.length})</div>
                     </div>
                 )}
             </div>
