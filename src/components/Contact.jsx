@@ -9,7 +9,7 @@ export default function Contact() {
             </div>
 
             <p>Hi, I'm Simon McKindley, a Full Stack Developer with experience in a wide variety of front-end and back-end technologies.</p>
-            <p>My goal is to create elegant code to build innovative solutions that solve realworld problems</p>
+            <p>My goal is to create elegant code to build innovative solutions that solve realworld problems.</p>
 
         </section>
     );

@@ -25,19 +25,24 @@ export default function Skills({ onSkillClick }) {
     const [loading, setLoading] = useState(true); // Loading state
 
     useEffect(() => {
-        fetch("./data/skillsList.json") // Fetch from local JSON file
-            .then((response) => response.json()) // Convert response to JSON
-            .then((data) => {
-                setSkills(data); // Store data in state
-                setLoading(false); // Stop loading
-            })
-            .catch((error) => console.error("Error fetching skills:", error));
+        setTimeout(() => {
+            fetch("./data/skillsList.json") // Fetch from local JSON file
+                .then((response) => response.json()) // Convert response to JSON
+                .then((data) => {
+                    setSkills(data); // Store data in state
+                    setLoading(false); // Stop loading
+                })
+                .catch((error) => console.error("Error fetching skills:", error));
+        }, 1200); // Simulate loading delay
     }, []);
 
     if (loading) return (
-        <section className="skills">
+        <section className="skills defined-section">
             <h3>Skills</h3>
-            <div className="loading">Loading skills...</div>
+            <div className="loading">
+                Loading skills
+                <div>.</div><div>.</div><div>.</div>
+            </div>
         </section>
     );
 

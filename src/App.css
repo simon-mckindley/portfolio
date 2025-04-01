@@ -63,6 +63,41 @@ button.skill-tab:hover {
 }
 
 
+/* Loading Spinner */
+.loading {
+  margin-block-start: 1rem;
+  display: flex;
+
+  div {
+    --_dot-delay: 0ms;
+    animation: dotFlash 1200ms var(--_dot-delay) infinite;
+  }
+
+  div:nth-child(1) {
+    margin-inline-start: 0.5ch;
+  }
+
+  div:nth-child(2) {
+    --_dot-delay: 200ms;
+  }
+
+  div:nth-child(3) {
+    --_dot-delay: 400ms;
+  }
+}
+
+@keyframes dotFlash {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+
 /* Main */
 header, main {
   padding-inline: 1rem;
@@ -201,10 +236,6 @@ header {
   margin-block-start: 2rem;
   min-height: 6rem;
 
-  .loading {
-    margin-block-start: 1rem;
-  }
-
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -276,10 +307,6 @@ header {
 .projects-container {
   margin-block: 2rem;
   min-height: 15rem;
-
-  .loading {
-    margin-block-start: 1rem;
-  }
 
   .projects-header {
     display: flex;
@@ -408,7 +435,7 @@ header {
   }
 }
 
-
+/* Media Queries */
 @media screen and (max-width: 520px) {
   .contact-info {
     justify-content: start;
