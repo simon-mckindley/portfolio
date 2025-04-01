@@ -111,7 +111,7 @@ header {
     margin-inline-start: auto;
     transform-style: preserve-3d;
     transition: transform 500ms;
-    animation: sub-head-scroll 30s ease-in-out infinite;
+    animation: sub-head-scroll 20s ease-in-out infinite;
 
     >* {
       position: absolute;
