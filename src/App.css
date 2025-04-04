@@ -23,15 +23,15 @@
   --card-bg-color: #e9eaee;
   --section-bg-color: rgba(34, 47, 58, 0.1);
   --card-shadow-color: #222f3a;
-  --highlight: #0000ff;
-  --highlight-light: #4444ff;
+  --highlight: #6060ff;
+  --highlight-light: #7272ff;
 }
 
 .dark {
   --bg-color: #222f3a;
   --text-color: #f0f0f0;
   --alt-text-color: #0f0f0f;
-  --card-bg-color: #9393fa;
+  --card-bg-color: #bbbbff;
   --section-bg-color: rgba(255, 255, 227, 0.1);
   --card-shadow-color: #0f0f0f;
 }
