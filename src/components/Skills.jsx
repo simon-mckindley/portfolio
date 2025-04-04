@@ -25,15 +25,13 @@ export default function Skills({ onSkillClick }) {
     const [loading, setLoading] = useState(true); // Loading state
 
     useEffect(() => {
-        setTimeout(() => {
-            fetch("./data/skillsList.json") // Fetch from local JSON file
-                .then((response) => response.json()) // Convert response to JSON
-                .then((data) => {
-                    setSkills(data); // Store data in state
-                    setLoading(false); // Stop loading
-                })
-                .catch((error) => console.error("Error fetching skills:", error));
-        }, 1200); // Simulate loading delay
+        fetch("https://profile-backend-6f74f72dedfc.herokuapp.com/skills") // Fetch skills from the server
+            .then((response) => response.json()) // Convert response to JSON
+            .then((data) => {
+                setSkills(data); // Store data in state
+                setLoading(false); // Stop loading
+            })
+            .catch((error) => console.error("Error fetching skills:", error.message));
     }, []);
 
     if (loading) return (

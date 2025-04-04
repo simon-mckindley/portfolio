@@ -10,16 +10,14 @@ export default function ProjectList({ filters, onFilterClick }) {
     const [showProjects, setShowProjects] = useState(true); // Animation control
 
     useEffect(() => {
-        setTimeout(() => {
-            fetch("./data/projects.json") // Fetch from local JSON file
-                .then((response) => response.json())
-                .then((data) => {
-                    setProjects(data);
-                    setFilteredProjects(data);
-                    setLoading(false);
-                })
-                .catch((error) => console.error("Error fetching projects:", error));
-        }, 1800); // Simulate loading delay
+        fetch("https://profile-backend-6f74f72dedfc.herokuapp.com/projects") // Fetch projects from the server
+            .then((response) => response.json())
+            .then((data) => {
+                setProjects(data);
+                setFilteredProjects(data);
+                setLoading(false);
+            })
+            .catch((error) => console.error("Error fetching projects:", error.message));
     }, []);
 
     useEffect(() => {
