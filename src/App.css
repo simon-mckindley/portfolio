@@ -3,6 +3,18 @@
   src: url('./assets/fonts/JetBrainsMono/JetBrainsMono-Bold.ttf') format('truetype');
 }
 
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #222f3a;
+    --text-color: #f0f0f0;
+    --alt-text-color: #0f0f0f;
+    --card-bg-color: #9393fa;
+    --section-bg-color: rgba(255, 255, 227, 0.1);
+    --card-shadow-color: #0f0f0f;
+  }
+}
+
 :root {
   --bg-color: #ffffe3;
   --text-color: #222f3a;
@@ -22,17 +34,6 @@
   --card-bg-color: #9393fa;
   --section-bg-color: rgba(255, 255, 227, 0.1);
   --card-shadow-color: #0f0f0f;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #222f3a;
-    --text-color: #f0f0f0;
-    --alt-text-color: #0f0f0f;
-    --card-bg-color: #9393fa;
-    --section-bg-color: rgba(255, 255, 227, 0.1);
-    --card-shadow-color: #0f0f0f;
-  }
 }
 
 body {
@@ -87,6 +88,7 @@ button.skill-tab:hover {
 }
 
 @keyframes dotFlash {
+
   0%,
   100% {
     opacity: 1;
