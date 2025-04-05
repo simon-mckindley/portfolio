@@ -1,5 +1,5 @@
 
-export default function ProjectCard ({ project }) {
+export default function ProjectCard({ project }) {
     return (
         <div className="project-card">
             <h4>{project.title}</h4>
@@ -10,9 +10,21 @@ export default function ProjectCard ({ project }) {
                     <span className="skill-tab" key={index}>{tech}</span>
                 ))}
             </p>
-            <a href={project.link} target="_blank" rel="noopener noreferrer">
-                View Project
-            </a>
+            <div className="project-links">
+                <div>
+                    {project.link && (
+                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                            View Project
+                        </a>
+                    )}
+                </div>
+                {project.code && (
+                    <a href={project.code} target="_blank" rel="noopener noreferrer">
+                        Code
+                    </a>
+                )}
+            </div>
+
         </div>
     );
 }

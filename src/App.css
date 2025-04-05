@@ -364,7 +364,9 @@ header {
     row-gap: 0.5rem;
   }
 
-  a {
+  .project-links {
+    display: flex;
+    justify-content: space-between;
     margin-top: auto;
   }
 }
