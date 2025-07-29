@@ -382,6 +382,11 @@ header {
   }
 }
 
+.project-card.featured {
+  outline: 4px solid white;
+  outline-offset: -4px;
+}
+
 .project-card:hover {
   scale: 1.01;
   box-shadow: 1px 1px 8px 0px var(--card-shadow-color);

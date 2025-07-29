@@ -1,7 +1,7 @@
 
 export default function ProjectCard({ project }) {
     return (
-        <div className="project-card">
+        <div className={`project-card ${project.type || ''}`}>
             <h4>{project.title}</h4>
             <p>{project.description}</p>
             <p className="project-tech">

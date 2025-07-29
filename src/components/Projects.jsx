@@ -33,10 +33,19 @@ export default function ProjectList({ filters, onFilterClick }) {
                         filters.every((filter) => project.technologies.includes(filter))
                     );
 
-            // Sort projects alphabetically by "title"
-            const sortedProjects = newFilteredProjects.sort((a, b) =>
-                a.title.localeCompare(b.title)
-            );
+            // Sort projects:
+            // 1. Featured projects first
+            // 2. Then sort alphabetically by title within each group
+            const sortedProjects = [...newFilteredProjects].sort((a, b) => {
+                const aFeatured = a.type === 'featured' ? 0 : 1;
+                const bFeatured = b.type === 'featured' ? 0 : 1;
+
+                if (aFeatured !== bFeatured) {
+                    return aFeatured - bFeatured; // Featured projects come first
+                }
+
+                return a.title.localeCompare(b.title); // Alphabetical within group
+            });
 
             setFilteredProjects(sortedProjects);
             setShowProjects(true); // Fade projects back in
