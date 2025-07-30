@@ -383,7 +383,7 @@ header {
 }
 
 .project-card.featured {
-  outline: 4px solid white;
+  outline: 4px solid var(--highlight-light);
   outline-offset: -4px;
 }
 
