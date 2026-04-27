@@ -4,12 +4,11 @@ export default function ProjectCard({ project }) {
         <div className={`project-card ${project.type || ''}`}>
             <h4>{project.title}</h4>
             <p>{project.description}</p>
-            <p className="project-tech">
-                <strong>Tech:</strong>
+            <div className="project-tech">
                 {project.technologies.map((tech, index) => (
                     <span className="skill-tab" key={index}>{tech}</span>
                 ))}
-            </p>
+            </div>
             <div className="project-links">
                 <div>
                     {project.link && (
