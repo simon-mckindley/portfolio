@@ -54,7 +54,9 @@ export default function ProjectList({ filters, onFilterClick }) {
 
     if (loading) return (
         <section className="projects-container defined-section">
-            <h3>Projects</h3>
+            <div className="projects-header">
+                <h3>Projects</h3>
+            </div>
             <div className="loading">
                 Loading projects
                 <div>.</div><div>.</div><div>.</div>
@@ -82,9 +84,9 @@ export default function ProjectList({ filters, onFilterClick }) {
                     </div>
                 )}
             </div>
-            <div className={`projects-grid ${showProjects ? "fade-in" : "fade-out"}`}>
+            <div className={`projects-grid`}>
                 {filteredProjects.map((project, index) => (
-                    <ProjectCard key={index} project={project} />
+                    <ProjectCard key={index} project={project} show={showProjects} />
                 ))}
             </div>
         </section>

@@ -1,7 +1,7 @@
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, show = true }) {
     return (
-        <div className={`project-card ${project.type || ''}`}>
+        <div className={`project-card ${show ? "fade-in" : "fade-out"}`}>
             <h4>{project.title}</h4>
             <p>{project.description}</p>
             <div className="project-tech">
