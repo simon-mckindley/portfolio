@@ -31,6 +31,11 @@ function App() {
     setFilters((prevFilters) => prevFilters.filter((filter) => filter !== skill));
   };
 
+  // Function to clear all filters
+  const handleClearFilters = () => {
+    setFilters([]);
+  }
+
 
   return (
     <>
@@ -39,7 +44,11 @@ function App() {
       <main>
         <Contact />
         <Skills onSkillClick={handleSkillClick} />
-        <ProjectList filters={filters} onFilterClick={handleFilterClick} />
+        <ProjectList 
+          filters={filters} 
+          onFilterClick={handleFilterClick} 
+          onClearFilters={handleClearFilters} 
+        />
       </main>
     </>
   )

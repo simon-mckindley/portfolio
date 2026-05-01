@@ -3,7 +3,7 @@ import ProjectCard from "./ProjectCard";
 import FilterItem from "./FilterItem";
 
 
-export default function ProjectList({ filters, onFilterClick }) {
+export default function ProjectList({ filters, onFilterClick, onClearFilters }) {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filteredProjects, setFilteredProjects] = useState([]);
@@ -68,6 +68,9 @@ export default function ProjectList({ filters, onFilterClick }) {
         <section className="projects-container defined-section">
             <div className="projects-header">
                 <h3>Projects</h3>
+                {showProjects && filters.length > 0 && (
+                    <div className="projects-count">({filteredProjects.length})</div>
+                )}
                 {filters.length > 0 && (
                     <div className="filter-cont">
                         Filters:
@@ -80,7 +83,16 @@ export default function ProjectList({ filters, onFilterClick }) {
                                 }
                             />
                         ))}
-                        <div className="projects-count">({filteredProjects.length})</div>
+
+                        {showProjects && (
+                            <button
+                                type="button"
+                                className="clear-filters"
+                                title="Clear all filters"
+                                onClick={onClearFilters} >
+                                    Clear All
+                            </button>
+                        )}
                     </div>
                 )}
             </div>
