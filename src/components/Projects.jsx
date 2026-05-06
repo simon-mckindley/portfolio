@@ -84,7 +84,7 @@ export default function ProjectList({ filters, onFilterClick, onClearFilters }) 
                             />
                         ))}
 
-                        {showProjects && (
+                        {showProjects && (filters.length > 1) && (
                             <button
                                 type="button"
                                 className="clear-filters"
