@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Contact() {
     const [showInfo, setShowInfo] = useState(false);
@@ -6,7 +6,7 @@ export default function Contact() {
 
     useEffect(() => {
         setInfoLeave(!showInfo);
-        setTimeout(() => setInfoLeave(false), 500);
+        setTimeout(() => setInfoLeave(false), 900);
     }, [showInfo]);
 
     return (
