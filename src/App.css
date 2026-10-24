@@ -124,6 +124,15 @@ header {
     font-family: var(--alt-font);
     text-align: center;
   }
+
+  @media (max-width: 520px) {
+    flex-direction: column;
+    align-items: start;
+
+    .contact {
+      margin-inline: 0;
+    }
+  }
 }
 
 /* Contact */
@@ -209,6 +218,24 @@ header {
         opacity: 1;
       }
     }
+  }
+}
+
+
+/* Headline */
+.headline {
+  margin-block: 1.75rem;
+
+  .headline-upper {
+    color: teal;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    letter-spacing: 1.6px;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin-block: 0.75rem;
   }
 }
 

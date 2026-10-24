@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 import './App.css'
 import Header from './components/Header'
+import Headline from './components/Headline'
 import ProjectList from './components/Projects'
 import Skills from './components/Skills'
 import ThemeButton from './components/ThemeButton'
@@ -41,6 +42,7 @@ function App() {
       <ThemeButton onClick={() => setDarkMode(prev => !prev)} />
       <Header />
       <main>
+        <Headline />
         <ProjectList
           filters={filters}
           onFilterClick={handleFilterClick}
