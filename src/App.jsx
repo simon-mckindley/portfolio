@@ -4,7 +4,6 @@ import './App.css'
 import Header from './components/Header'
 import ProjectList from './components/Projects'
 import Skills from './components/Skills'
-import Contact from './components/Contact'
 import ThemeButton from './components/ThemeButton'
 
 function App() {
@@ -42,13 +41,12 @@ function App() {
       <ThemeButton onClick={() => setDarkMode(prev => !prev)} />
       <Header />
       <main>
-        <Contact />
-        <Skills onSkillClick={handleSkillClick} />
-        <ProjectList 
-          filters={filters} 
-          onFilterClick={handleFilterClick} 
-          onClearFilters={handleClearFilters} 
+        <ProjectList
+          filters={filters}
+          onFilterClick={handleFilterClick}
+          onClearFilters={handleClearFilters}
         />
+        <Skills onSkillClick={handleSkillClick} />
       </main>
     </>
   )

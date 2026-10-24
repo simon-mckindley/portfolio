@@ -1,54 +1,24 @@
-@font-face {
-  font-family: 'JetBrainsBold';
-  src: url('./assets/fonts/JetBrainsMono/JetBrainsMono-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Nunito';
-  src: url('./assets/fonts/Nunito/Nunito-VariableFont_wght.ttf') format('truetype');
-}
-
-
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-color: hsl(224, 36%, 15%);
     --text-color: #f0f0f0;
-    --alt-text-color: #0f0f0f;
-    --card-bg-color: hsl(0, 5%, 81%);
-    --section-bg-color: rgba(255, 255, 227, 0.1);
-    --card-shadow-color: #0f0f0f;
   }
 }
 
 :root {
   --bg-color: #fdfdfd;
   --text-color: #222f3a;
-  --card-text-color: #222f3a;
-  --alt-text-color: #f0f0f0;
-  --card-bg-color: #ededa3;
-  --card-light-bg-color: #ffffbe;
-  --skill-bg-color: hsl(0, 5%, 81%);
-  --section-bg-color: rgba(34, 47, 58, 0.1);
-  --card-shadow-color: #222f3a;
-  --text-shadow-color: black;
-  --highlight: #6060ff;
-  --highlight-light: #7272ff;
 }
 
 .dark {
   --bg-color: hsl(224, 36%, 15%);
   --text-color: #f0f0f0;
-  --alt-text-color: #0f0f0f;
-  --card-bg-color: hsl(0, 5%, 81%);
-  --card-light-bg-color: hsl(0, 17%, 89%);
-  --section-bg-color: rgba(255, 255, 227, 0.1);
-  --card-shadow-color: #0f0f0f;
-  --text-shadow-color: #7272ff;
 }
 
 body {
   color: var(--text-color);
   background-color: var(--bg-color);
+  transition: color 300ms, background-color 300ms;
 }
 
 .defined-section {
@@ -147,106 +117,98 @@ header, main {
 
 /* Header */
 header {
-  max-width: max-content;
-  margin-inline: auto;
-  margin-block-end: 1rem;
+  display: flex;
+  align-items: center;
 
   h1 {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 3rem;
-    font-style: italic;
+    font-family: var(--alt-font);
     text-align: center;
   }
-
-  .sub-head {
-    position: relative;
-    text-align: end;
-    font-size: 0.9rem;
-    height: 1.2rem;
-    margin-inline-start: auto;
-    transform-style: preserve-3d;
-    transition: transform 500ms;
-    animation: sub-head-scroll 15s ease-in-out infinite;
-
-    >* {
-      position: absolute;
-      right: 0;
-      width: max-content;
-      backface-visibility: hidden;
-    }
-
-    .upper {
-      transform: rotateY(0deg);
-    }
-
-    .lower {
-      transform: rotateX(-90deg) translateY(0.3rem);
-    }
-  }
 }
-
-@keyframes sub-head-scroll {
-  0%, 44.5% {
-    transform: rotateX(0deg);
-  }
-
-  49.5% {
-    transform: rotateX(90deg);
-  }
-
-  94.5% {
-    transform: rotateX(90deg);
-  }
-
-  99.5% {
-    transform: rotateX(0deg);
-  }
-}
-
 
 /* Contact */
-.contact p {
-  max-width: 80ch;
-  margin: 0.4rem auto;
-}
-
-.contact-info {
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 1.5rem;
-  column-gap: 1rem;
-  justify-content: center;
-  margin-block: 2.5rem 1rem;
-}
-
-.contact-info-item {
+.contact {
   position: relative;
-  color: var(--highlight);
-  transition: color 300ms;
+  margin-inline: auto;
+  font-weight: 600;
 
-  :visited {
-    color: var(--highlight);
+  .contact-button {
+    padding: 0.25rem 1rem;
+    border-radius: 2px;
+    transition: background-color 100ms;
+
+    &.show {
+      background-color: gainsboro;
+    }
   }
 
-  :hover {
-    color: var(--text-color);
-  }
-
-  span {
+  .contact-info {
+    background-color: lightgreen;
     position: absolute;
-    top: -1rem;
-    color: var(--text-color);
-    font-size: 0.8rem;
-    font-weight: bold;
-    transition: margin 300ms;
+    top: calc(100% + 0.75rem);
+    left: -1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    padding: 0.25rem 1rem;
+    border-radius: 4px;
+    box-shadow: 3px 3px 6px 1px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    isolation: isolate;
+
+    translate: -2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition-property: translate, opacity;
+    transition-duration: 400ms;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -0.5rem;
+      left: 3rem;
+      height: 1rem;
+      width: 1rem;
+      background-color: inherit;
+      border-radius: 2px;
+      rotate: 45deg;
+      z-index: -1;
+    }
+
+    &.show {
+      translate: 0;
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    &.leave {
+      translate: 2rem;
+      opacity: 0;
+      pointer-events: none;
+    }
   }
-}
 
-.contact-info-item:hover {
-  color: var(--highlight-light);
+  .contact-info-item {
+    display: flex;
+    flex-direction: column;
 
-  span {
-    margin-inline-start: 0.5rem;
+    .contact-address {
+      font-size: 0.8rem;
+      line-height: 1.2rem;
+      width: max-content;
+      opacity: 0.6;
+      transition: opacity 300ms;
+    }
+
+    &:visited {
+      color: var(--text-color);
+    }
+
+    &:hover {
+      .contact-address {
+        opacity: 1;
+      }
+    }
   }
 }
 
@@ -419,10 +381,6 @@ header {
   opacity: 0;
   rotate: -45deg;
   transition: transform 600ms;
-
-  h4, p {
-    font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
 
   h4 {
     font-size: 1.4rem;
