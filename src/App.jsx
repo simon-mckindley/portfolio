@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 
 import './App.css'
 import Header from './components/Header'
+import Contact from './components/Contact'
 import Headline from './components/Headline'
 import ProjectList from './components/Projects'
+import ProjectCard from "./components/ProjectCard";
 import Skills from './components/Skills'
 import ThemeButton from './components/ThemeButton'
 
@@ -36,19 +38,64 @@ function App() {
     setFilters([]);
   }
 
+  const [showContact, setShowContact] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+
+  const handleContactClick = () => {
+    setShowContact(prev => !prev);
+    setShowAbout(false);
+  }
+
+  const handleAboutClick = () => {
+    setShowAbout(prev => !prev);
+    setShowContact(false);
+  }
 
   return (
     <>
       <ThemeButton onClick={() => setDarkMode(prev => !prev)} />
-      <Header />
+      <Header 
+        onContactClick={handleContactClick}
+        showContact={showContact}
+        onAboutClick={handleAboutClick}
+        showAbout={showAbout}
+      />
       <main>
         <Headline />
+        
+        <section className="main-grid">
+
+          <div id="feature">
+            <ProjectCard 
+              heading={"Featured project"} 
+              project={ {title: "Feature prohject", description: "Project description", technologies: ["React", "CSS"], link: "link", code: "link"}} 
+            />
+          </div>
+
+          <div id="about">
+            <div className="bento-card about-card">
+              <h3 className="card-heading">About</h3>
+              <p>Stuff about me here</p>
+            </div>
+          </div>
+
+          <div id="skills">
+            <Skills onSkillClick={handleSkillClick} />
+          </div>
+
+          <div id="contact">
+            <Contact 
+            
+            />
+          </div>
+          
+        </section>
+
         <ProjectList
           filters={filters}
           onFilterClick={handleFilterClick}
           onClearFilters={handleClearFilters}
         />
-        <Skills onSkillClick={handleSkillClick} />
       </main>
     </>
   )

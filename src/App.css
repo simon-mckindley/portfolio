@@ -121,7 +121,26 @@ header {
   .header-inner {
     display: flex;
     align-items: center;
-    margin-inline: 1rem;
+    padding-inline: 1rem;
+    margin-inline: auto;
+    max-width: var(--width-max);
+
+    .header-links {
+      display: flex;
+      gap: 1rem;
+      margin-inline: auto;
+      font-weight: 600;
+
+      button {
+        padding: 0.25rem 1rem;
+        border-radius: 8px;
+        transition: background-color 100ms;
+
+        &.show {
+          background-color: var(--color-grey);
+        }
+      }
+    }
 
     @media (max-width: 520px) {
       flex-direction: column;
@@ -137,49 +156,70 @@ header {
     font-family: var(--alt-font);
     text-align: center;
   }
+}
 
-  .header-links {
-    display: flex;
-    gap: 1rem;
-    margin-inline: auto;
-    font-weight: 600;
+
+/* Bento card */
+.bento-card {
+  --_padding-inline: 1.25rem;
+  --_padding-block: 0.75rem;
+  height: calc(100% - var(--_padding-block) * 2);
+  width: calc(100% - var(--_padding-inline) * 2);
+  padding: var(--_padding-block) var(--_padding-inline);
+  border-radius: 20px;
+  background-color: var(--color-card-1);
+
+  .card-heading {
+    color: var(--color-header);
+    text-transform: uppercase;
+    font-size: 20px;
+    letter-spacing: 1.6px;
+    font-weight: normal;
   }
 }
 
-/* Contact */
-.contact {
-  position: relative;
 
-  .contact-button {
-    padding: 0.25rem 1rem;
-    border-radius: 2px;
-    transition: background-color 100ms;
+/* Grid */
+.main-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template:
+    "feature feature about contact"
+    "feature feature skills skills"
+  ;
+  grid-template-columns: repeat(4, 1fr);
 
-    &.show {
-      background-color: gainsboro;
-    }
+  >* {
+    border: 1px solid red;
   }
 
-  .contact-info {
-    background-color: lightgreen;
-    position: absolute;
-    top: calc(100% + 0.75rem);
-    left: -1rem;
+  #feature {
+    grid-area: feature;
+  }
+
+  #about {
+    grid-area: about;
+  }
+
+  #skills {
+    grid-area: skills;
+  }
+
+  #contact {
+    grid-area: contact;
+  }
+}
+
+
+/* Contact */
+.contact {
+  /* position: relative; */
+
+  .contact-card {
     display: flex;
     flex-direction: column;
     row-gap: 0.5rem;
-    padding: 0.25rem 1rem;
-    border-radius: 4px;
-    box-shadow: 3px 3px 6px 1px var(--color-shadow);
-    z-index: 100;
-    isolation: isolate;
-
-    translate: -3rem;
-    opacity: 0;
-    pointer-events: none;
-    transition:
-      translate 800ms,
-      opacity 600ms;
+    background-color: var(--color-card-1);
 
     &:before {
       content: "";
@@ -192,43 +232,42 @@ header {
       border-radius: 2px;
       rotate: 45deg;
       z-index: -1;
+
+      opacity: 0;
+      transition: opacity 600ms;
     }
 
     &.show {
-      translate: 0;
-      opacity: 1;
-      pointer-events: all;
-    }
+      position: relative;
+      box-shadow: 3px 3px 6px 1px var(--color-shadow);
+      z-index: 100;
 
-    &.leave {
-      translate: 3rem;
-      opacity: 0;
-      pointer-events: none;
-      transition:
-        translate 800ms 0s,
-        opacity 300ms 500ms;
-    }
-  }
-
-  .contact-info-item {
-    display: flex;
-    flex-direction: column;
-
-    .contact-address {
-      font-size: 0.8rem;
-      line-height: 1.2rem;
-      width: max-content;
-      opacity: 0.6;
-      transition: opacity 300ms;
-    }
-
-    &:visited {
-      color: var(--text-color);
-    }
-
-    &:hover {
-      .contact-address {
+      &:before {
         opacity: 1;
+      }
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+
+      .label {
+        font-weight: bold;
+      }
+
+      .contact-address {
+        line-height: 1.2rem;
+        width: max-content;
+      }
+
+      &:visited {
+        color: var(--text-color);
+      }
+
+      &:hover {
+        .contact-address {
+          text-decoration: underline;
+        }
       }
     }
   }
@@ -240,7 +279,7 @@ header {
   margin-block: 1.75rem;
 
   .headline-upper {
-    color: teal;
+    color: var(--color-header);
     text-transform: uppercase;
     font-size: 1.5rem;
     letter-spacing: 1.6px;
@@ -255,14 +294,10 @@ header {
 
 /* Skills */
 .skills {
-  margin-block-start: 2rem;
-  min-height: 6rem;
+
 
   .skills-header {
-    display: flex;
-    align-items: end;
-    flex-wrap: wrap;
-    column-gap: 2rem;
+
 
     p {
       margin-inline: auto;
@@ -270,30 +305,8 @@ header {
   }
 
   ul {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 2rem;
-    list-style: none;
-    margin-block: 0rem 0.5rem;
-    padding-inline: 0rem;
 
-    li {
-      --_delay: 100ms;
-      opacity: 0;
-      transform: translateY(100%);
-
-      position: relative;
-      display: flex;
-      flex-wrap: wrap;
-      column-gap: 0.5rem;
-      row-gap: 0.5rem;
-      margin-block: 0.6rem;
-      padding: 1.2rem 0.25rem 0.25rem;
-      min-width: 13rem;
-      background-color: var(--skill-bg-color);
-      box-shadow: 1px 1px 6px 0px var(--card-shadow-color);
-      animation: up-in 600ms var(--_delay) ease forwards;
-    }
+    li {}
 
     li:nth-child(2) {
       --_delay: 200ms;
@@ -321,69 +334,32 @@ header {
 
 
     li:hover .label {
-      margin-inline-start: 0.5rem;
+      /* margin-inline-start: 0.5rem; */
     }
 
-    .label {
-      position: absolute;
-      top: 0rem;
-      color: var(--card-text-color);
-      font-size: 0.8rem;
-      font-weight: bold;
-      transition: margin 300ms;
-    }
+    .label {}
   }
 }
 
 
 /* Projects */
 .projects-container {
-  margin-block: 2rem;
-  padding-inline: 0.25rem;
-  min-height: 24rem;
-  overflow: hidden;
+
 
   .loading {
     margin-inline: 1rem;
   }
 
   .projects-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    column-gap: 2rem;
-    row-gap: 0.5rem;
-    min-height: 1.7rem;
-    margin-inline: 1rem;
-    padding-bottom: 0.25rem;
 
-    .projects-count {
-      opacity: 0;
-      animation: up-in 600ms ease 600ms forwards;
-    }
+
+    .projects-count {}
 
     .filter-cont {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      column-gap: 1rem;
-      row-gap: 0.5rem;
-      width: 100%;
+
 
       .clear-filters {
-        font-size: 0.9rem;
-        margin-inline-start: 5rem;
-        padding: 0.1rem 0.5rem;
-        border: 1px solid var(--highlight-light);
-        border-radius: 4px;
-        background-color: var(--highlight-light);
-        color: var(--alt-text-color);
-        box-shadow: 1px 1px 6px 0px var(--card-shadow-color);
-        cursor: pointer;
-        transition-property: background-color, border-color;
-        transition-duration: 300ms;
-        opacity: 0;
-        animation: up-in 900ms ease-in 900ms forwards;
+
 
         &:hover {
           background-color: var(--highlight);
@@ -394,34 +370,10 @@ header {
   }
 }
 
-.projects-grid {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 20rem;
-  gap: 1rem;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  padding: 1.5rem 0.5rem 1rem;
-  min-height: 20rem;
-  max-width: 80vw;
-}
+.projects-grid {}
 
 .project-card {
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.5rem;
-  padding: 0.5rem;
-  color: var(--card-text-color);
-  background: linear-gradient(var(--card-light-bg-color) 0%, var(--card-bg-color) 10%, var(--card-bg-color) 90%, var(--card-light-bg-color) 100%);
-  box-shadow: 1px 1px 6px 0px var(--card-shadow-color);
-  box-sizing: border-box;
-  border: 4px solid var(--highlight-light);
-  border-radius: 16px;
-  scroll-snap-align: center;
-  opacity: 0;
-  rotate: -45deg;
-  transition: transform 600ms;
+
 
   h4 {
     font-size: 1.4rem;
@@ -432,16 +384,7 @@ header {
     font-weight: 600;
   }
 
-  .project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 0.5rem;
-    row-gap: 0.5rem;
-    padding-block-start: 1rem;
-    margin: auto 0.5rem 1rem;
-    border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.4);
-  }
+  .project-tech {}
 
   .project-links {
     display: flex;
@@ -450,7 +393,7 @@ header {
 }
 
 .project-card:hover {
-  transform: translateY(-0.5rem) rotate(1deg);
+  /* transform: translateY(-0.5rem) rotate(1deg); */
 }
 
 
@@ -463,8 +406,8 @@ header {
   border-radius: 4px;
   box-shadow: 1px 1px 6px 0px var(--card-shadow-color);
   overflow: hidden;
-  opacity: 0;
-  animation: up-in 300ms ease forwards;
+  /* opacity: 0; */
+  /* animation: up-in 300ms ease forwards; */
 
   span {
     font-size: 0.9rem;
@@ -498,14 +441,14 @@ header {
 
 /* Fade-out effect (hides projects before updating) */
 .fade-out {
-  opacity: 0;
+  /* opacity: 0; */
   pointer-events: none;
 }
 
 /* Fade-in effect (brings filtered projects back) */
 .fade-in {
   --delay: 0ms;
-  animation: fadeIn 600ms ease var(--delay) forwards;
+  /* animation: fadeIn 600ms ease var(--delay) forwards; */
 
   &:nth-child(2) {
     --delay: 300ms;

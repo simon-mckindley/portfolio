@@ -45,10 +45,9 @@ export default function Skills({ onSkillClick }) {
     );
 
     return (
-        <section className="skills defined-section">
+        <div className="skills defined-section">
             <div className="skills-header">
                 <h3>Skills</h3>
-                <p>Click on a skill to filter projects</p>
             </div>
             <ul>
                 {skillsList.map((skillItem, index) => (
@@ -59,6 +58,6 @@ export default function Skills({ onSkillClick }) {
                     />
                 ))}
             </ul>
-        </section>
+        </div>
     );
 }

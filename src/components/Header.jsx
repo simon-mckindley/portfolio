@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import Contact from './Contact'
 
-export default function Header() {
+export default function Header({ onContactClick, showContact, onAboutClick, showAbout }) {
     const [scrollPosition, setScrollPosition] = useState(0);
 
     useEffect(() => {
         const handleScroll = () => setScrollPosition(window.scrollY);
-
         window.addEventListener('scroll', handleScroll);
-
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -18,8 +15,21 @@ export default function Header() {
                 <h1>Simon McKindley</h1>
 
                 <div className="header-links">
-                    <button>Projects</button>
-                    <Contact />
+                    <button
+                        type="button"
+                        className={`contact-button ${showAbout ? "show" : ""}`}
+                        onClick={onAboutClick}
+                    >
+                        About
+                    </button>
+
+                    <button
+                        type="button"
+                        className={`contact-button ${showContact ? "show" : ""}`}
+                        onClick={onContactClick}
+                    >
+                        Contact
+                    </button>
                 </div>
             </div>
         </header>
