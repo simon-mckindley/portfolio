@@ -134,7 +134,7 @@ header {
       button {
         padding: 0.25rem 1rem;
         border-radius: 8px;
-        transition: background-color 100ms;
+        transition: background-color 300ms;
 
         &.show {
           background-color: var(--color-grey);
@@ -179,6 +179,41 @@ header {
 }
 
 
+/* Translate card */
+.translate-card {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  transition: translate 600ms ease, box-shadow 300ms;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -0.5rem;
+    left: 3rem;
+    height: 1rem;
+    width: 1rem;
+    background-color: inherit;
+    border-radius: 2px;
+    rotate: 45deg;
+    z-index: -1;
+
+    translate: 0 1rem;
+    transition: translate 300ms 500ms;
+  }
+
+  &.show {
+    translate:
+      calc(var(--_translateX) - 1rem) calc(var(--_translateY) + 1rem);
+    box-shadow: 3px 3px 6px 1px var(--color-shadow);
+
+    &:before {
+      translate: 0;
+    }
+  }
+}
+
+
 /* Grid */
 .main-grid {
   display: grid;
@@ -190,7 +225,7 @@ header {
   grid-template-columns: repeat(4, 1fr);
 
   >* {
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 
   #feature {
@@ -213,40 +248,7 @@ header {
 
 /* Contact */
 .contact-card {
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.5rem;
-  background-color: var(--color-card-1);
-  transition: translate 600ms ease, box-shadow 300ms;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: -0.5rem;
-    left: 3rem;
-    height: 1rem;
-    width: 1rem;
-    background-color: inherit;
-    border-radius: 2px;
-    rotate: 45deg;
-    z-index: -1;
-
-    opacity: 0;
-    transition: opacity 600ms;
-  }
-
-  &.show {
-    translate:
-      calc(var(--_translateX) - 1rem) calc(var(--_translateY) + 1rem);
-    width: auto;
-    height: auto;
-    box-shadow: 3px 3px 6px 1px var(--color-shadow);
-    z-index: 100;
-
-    &:before {
-      opacity: 1;
-    }
-  }
+  background-color: var(--color-card-2);
 
   .contact-item {
     display: flex;

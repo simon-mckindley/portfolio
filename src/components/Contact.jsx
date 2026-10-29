@@ -27,7 +27,7 @@ export default function Contact({ showContact = false, buttonX, buttonY }) {
     return (          
         <ul 
             ref={containerRef}
-            className={`bento-card contact-card ${showContact ? "show" : ""}`}
+            className={`bento-card translate-card contact-card ${showContact ? "show" : ""}`}
             style={{ "--_translateX": `${translateX}px`, "--_translateY": `${translateY}px` }}
         >
             <h3 className="card-heading">Contact me</h3>

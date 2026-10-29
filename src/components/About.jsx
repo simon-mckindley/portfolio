@@ -28,7 +28,7 @@ console.log(showAbout)
     return (            
         <div 
             ref={containerRef}
-            className={`bento-card about-card ${showAbout ? "show" : ""}`}
+            className={`bento-card translate-card about-card ${showAbout ? "show" : ""}`}
             style={{ "--_translateX": `${translateX}px`, "--_translateY": `${translateY}px` }}
         >
             <h3 className="card-heading">About</h3>
