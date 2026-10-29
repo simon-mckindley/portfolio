@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import './App.css'
 import Header from './components/Header'
 import Contact from './components/Contact'
+import About from './components/About'
 import Headline from './components/Headline'
 import ProjectList from './components/Projects'
 import ProjectCard from "./components/ProjectCard";
@@ -39,17 +40,36 @@ function App() {
   }
 
   const [showContact, setShowContact] = useState(false);
+  const contactRef = useRef(null);
   const [showAbout, setShowAbout] = useState(false);
+  const aboutRef = useRef(null);
+  const [buttonCoords, setButtonCoords] = useState({ x: 0, y: 0 })
 
   const handleContactClick = () => {
     setShowContact(prev => !prev);
     setShowAbout(false);
   }
 
+  useEffect(() => {
+    if (showContact) {
+      const rect = contactRef?.current.getBoundingClientRect();
+      setButtonCoords({ x: rect.x, y: rect.bottom });
+      // console.log({ x: rect.x, y: rect.y, width: rect.width, height: rect.height });
+    }
+  }, [showContact]);
+
   const handleAboutClick = () => {
     setShowAbout(prev => !prev);
     setShowContact(false);
   }
+
+  useEffect(() => {
+    if (showAbout) {
+      const rect = aboutRef?.current.getBoundingClientRect();
+      setButtonCoords({ x: rect.x, y: rect.bottom });
+      console.log({ x: rect.x, y: rect.y, width: rect.width, height: rect.height });
+    }
+  }, [showAbout]);
 
   return (
     <>
@@ -57,8 +77,10 @@ function App() {
       <Header 
         onContactClick={handleContactClick}
         showContact={showContact}
+        contactRef={contactRef}
         onAboutClick={handleAboutClick}
         showAbout={showAbout}
+        aboutRef={aboutRef}
       />
       <main>
         <Headline />
@@ -73,20 +95,23 @@ function App() {
           </div>
 
           <div id="about">
-            <div className="bento-card about-card">
-              <h3 className="card-heading">About</h3>
-              <p>Stuff about me here</p>
-            </div>
-          </div>
-
-          <div id="skills">
-            <Skills onSkillClick={handleSkillClick} />
+            <About
+              showAbout={showAbout}
+              buttonX={buttonCoords.x}
+              buttonY={buttonCoords.y}
+            />
           </div>
 
           <div id="contact">
             <Contact 
-            
+              showContact={showContact}
+              buttonX={buttonCoords.x}
+              buttonY={buttonCoords.y} 
             />
+          </div>
+
+          <div id="skills">
+            <Skills onSkillClick={handleSkillClick} />
           </div>
           
         </section>

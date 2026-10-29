@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function Header({ onContactClick, showContact, onAboutClick, showAbout }) {
+export default function Header({ onContactClick, showContact, onAboutClick, showAbout, contactRef, aboutRef }) {
     const [scrollPosition, setScrollPosition] = useState(0);
 
     useEffect(() => {
@@ -16,6 +16,7 @@ export default function Header({ onContactClick, showContact, onAboutClick, show
 
                 <div className="header-links">
                     <button
+                        ref={aboutRef} 
                         type="button"
                         className={`contact-button ${showAbout ? "show" : ""}`}
                         onClick={onAboutClick}
@@ -24,6 +25,7 @@ export default function Header({ onContactClick, showContact, onAboutClick, show
                     </button>
 
                     <button
+                        ref={contactRef}
                         type="button"
                         className={`contact-button ${showContact ? "show" : ""}`}
                         onClick={onContactClick}
