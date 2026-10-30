@@ -1,35 +1,7 @@
-import { useEffect, useRef, useState } from "react";
 
-export default function Contact({ showContact = false, buttonX, buttonY }) {
-    const containerRef = useRef(null);
-    const [translateX, setTranslateX] = useState(0);
-    const [translateY, setTranslateY] = useState(0);
-
-    useEffect(() => {
-        const getContainerPosition = () => {
-            const rect = containerRef?.current.getBoundingClientRect();
-            return rect ? { x: rect.x, y: rect.y } : null;
-        }
-
-        if (!showContact) {
-            setTranslateX(0);
-            setTranslateY(0);
-            return;
-        }
-
-        const position = getContainerPosition();
-        if (!position) return;
-
-        setTranslateX(buttonX - position.x);
-        setTranslateY(buttonY - position.y);
-    }, [showContact, buttonX, buttonY, containerRef]);
-
+export default function Contact() {
     return (          
-        <ul 
-            ref={containerRef}
-            className={`bento-card translate-card contact-card ${showContact ? "show" : ""}`}
-            style={{ "--_translateX": `${translateX}px`, "--_translateY": `${translateY}px` }}
-        >
+        <ul>
             <h3 className="card-heading">Contact me</h3>
             <li>
                 <a className="contact-item" href="mailto:simonmckindley@gmail.com">

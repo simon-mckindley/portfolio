@@ -2,11 +2,12 @@ import { useState, useEffect, useRef } from 'react'
 
 import './App.css'
 import Header from './components/Header'
+import TranslateCard from './components/TranslateCard'
 import Contact from './components/Contact'
 import About from './components/About'
 import Headline from './components/Headline'
 import ProjectList from './components/Projects'
-import ProjectCard from "./components/ProjectCard";
+import ProjectCard from "./components/ProjectCard"
 import Skills from './components/Skills'
 import ThemeButton from './components/ThemeButton'
 
@@ -67,7 +68,7 @@ function App() {
     if (showAbout) {
       const rect = aboutRef?.current.getBoundingClientRect();
       setButtonCoords({ x: rect.x, y: rect.bottom });
-      console.log({ x: rect.x, y: rect.y, width: rect.width, height: rect.height });
+      // console.log({ x: rect.x, y: rect.y, width: rect.width, height: rect.height });
     }
   }, [showAbout]);
 
@@ -95,16 +96,20 @@ function App() {
           </div>
 
           <div id="about">
-            <About
-              showAbout={showAbout}
+            <TranslateCard
+              content={<About />}
+              contentClass={'about-card'}
+              show={showAbout}
               buttonX={buttonCoords.x}
               buttonY={buttonCoords.y}
             />
           </div>
 
           <div id="contact">
-            <Contact 
-              showContact={showContact}
+            <TranslateCard
+              content={<Contact />} 
+              contentClass={'contact-card'}
+              show={showContact}
               buttonX={buttonCoords.x}
               buttonY={buttonCoords.y} 
             />
