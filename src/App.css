@@ -115,7 +115,7 @@ header {
   transition: box-shadow 300ms;
 
   &.sticky {
-    box-shadow: 0 0 3px 1px var(--color-shadow);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   }
 
   .header-inner {
@@ -181,7 +181,6 @@ header {
 
 /* Translate card */
 .translate-card {
-  position: relative;
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
@@ -199,17 +198,20 @@ header {
     rotate: 45deg;
     z-index: -1;
 
+    visibility: hidden;
     translate: 0 1rem;
     transition: translate 300ms 500ms;
   }
 
   &.show {
+    position: relative;
     translate:
       calc(var(--_translateX) - 1rem) calc(var(--_translateY) + 1rem);
     box-shadow: 3px 3px 8px 0px var(--color-shadow);
     z-index: 100;
 
     &:before {
+      visibility: visible;
       translate: 0;
     }
   }
@@ -245,6 +247,16 @@ header {
   #contact {
     grid-area: contact;
   }
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+    grid-template:
+      "about contact"
+      "feature feature"
+      "skills skills"
+    ;
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 
@@ -252,29 +264,77 @@ header {
 .contact-card {
   background-color: var(--color-card-2);
 
-  .contact-item {
+  .contact-list {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
 
-    .label {
-      font-weight: bold;
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+
+      input {
+        display: none;
+      }
+
+      label {
+        cursor: pointer;
+        transition: text-shadow 300ms, color 300ms;
+      }
+
+      &:has(input:checked) {
+        label {
+          text-decoration: underline;
+        }
+      }
     }
+
+    &:has(input:checked) {
+      .contact-item:not(:has(input:checked)) label {
+        color: transparent;
+        text-shadow: 0 0 2px var(--text-color);
+      }
+    }
+  }
+
+  .link-container {
+    position: relative;
 
     .contact-address {
+      position: absolute;
+      left: -4rem;
       line-height: 1.2rem;
       width: max-content;
-    }
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      background-color: var(--color-card-3);
 
-    &:visited {
-      color: var(--text-color);
-    }
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 300ms;
 
-    &:hover {
-      .contact-address {
+      &.show {
+        visibility: visible;
+        opacity: 1;
+        box-shadow: 3px 3px 8px 0px var(--color-shadow);
+      }
+
+      &:visited {
+        color: var(--text-color);
+      }
+
+      &:hover {
         text-decoration: underline;
       }
     }
   }
+}
+
+
+/* About */
+.about-card {
+  background-color: var(--color-card-4);
 }
 
 

@@ -18,6 +18,8 @@ html {
   --color-grey: gainsboro;
   --color-card-1: #d9eee6;
   --color-card-2: #e9ddf3;
+  --color-card-3: #c5cfdc;
+  --color-card-4: #e9e9b3;
 
   --width-max: 1280px;
 }
