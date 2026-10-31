@@ -13,13 +13,14 @@ html {
 
   --color-light: #fdfdfd;
   --color-dark: #222f3a;
-  --color-shadow: rgba(0, 0, 0, 0.2);
+  --color-shadow: rgba(0, 0, 0, 0.5);
   --color-header: teal;
   --color-grey: gainsboro;
   --color-card-1: #d9eee6;
   --color-card-2: #e9ddf3;
   --color-card-3: #c5cfdc;
   --color-card-4: #e9e9b3;
+  --color-card-5: #f1dfd4;
 
   --width-max: 1280px;
 }

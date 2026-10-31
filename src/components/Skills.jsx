@@ -1,63 +1,76 @@
-import React, { useState, useEffect } from "react";
-
+import { useState, useEffect } from "react";
 
 const SkillsItem = ({ skillItem, onSkillClick }) => {
     return (
-        <li>
-            <span className="label">{skillItem.title}</span>
-            {skillItem.skills.map((skill, index) => (
-                <button
-                    type="button"
-                    className="skill-tab"
-                    title="Add filter"
-                    onClick={() => onSkillClick(skill)}
-                    id={skill}
-                    key={index}>
-                    {skill}
-                </button>
-            ))}
+        <li className="skill-item">
+            <div className="title">{skillItem.title}</div>
+            <div className="item-list">
+                <div className="scroll-container">
+                    {skillItem.skills.map((skill, i) => (
+                        <>
+                            <input
+                                key={i}
+                                type="checkbox"
+                                id={skill}
+                                name="skill-check"
+                                value={skill}
+                                title="Add filter"
+                                onClick={() => onSkillClick(skill)}
+                                />
+
+                            <label key={i} htmlFor={skill}>{skill}</label>
+                        </>
+                    ))}
+                </div>
+            </div>
         </li>
     );
 };
 
 export default function Skills({ onSkillClick }) {
-    const [skillsList, setSkills] = useState([]); // State to store skillsList
-    const [loading, setLoading] = useState(true); // Loading state
+    const includeList = [
+        "Programming Languages",
+        "Frameworks & Libraries",
+        "Front-End"
+    ];
+    const [skillsList, setSkillsList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
-        fetch("https://profile-backend-6f74f72dedfc.herokuapp.com/skills") // Fetch skills from the server
-            .then((response) => response.json()) // Convert response to JSON
+        fetch("https://profile-backend-6f74f72dedfc.herokuapp.com/skills")
+            .then((response) => response.json())
             .then((data) => {
-                setSkills(data); // Store data in state
-                setLoading(false); // Stop loading
+                setSkillsList(data);
+                setLoading(false);
             })
-            .catch((error) => console.error("Error fetching skills:", error.message));
+            .catch((error) => {
+                console.error("Error fetching skills:", error.message);
+                setError(true);
+            });
     }, []);
 
-    if (loading) return (
-        <section className="skills defined-section">
-            <h3>Skills</h3>
-            <div className="loading">
-                Loading skills
-                <div>.</div><div>.</div><div>.</div>
-            </div>
-        </section>
-    );
-
     return (
-        <div className="skills defined-section">
-            <div className="skills-header">
-                <h3>Skills</h3>
-            </div>
-            <ul>
-                {skillsList.map((skillItem, index) => (
-                    <SkillsItem
-                        key={index}
-                        skillItem={skillItem}
-                        onSkillClick={onSkillClick}
-                    />
-                ))}
-            </ul>
+        <div className="bento-card skills-card">
+            <h3 className="card-heading">Skills</h3>
+            {loading ? (
+                <div className="loading">
+                    {error ? 'Error loading, try again' : 'Loading skills'}
+                    <div>.</div><div>.</div><div>.</div>
+                </div>
+            ) : (
+                <ul className="skills-list">
+                    {skillsList
+                        .filter(skill => includeList.includes(skill.title))
+                        .map((skillItem, index) => (
+                            <SkillsItem
+                                key={index}
+                                skillItem={skillItem}
+                                onSkillClick={onSkillClick}
+                            />
+                    ))}
+                </ul>
+            )}
         </div>
     );
 }

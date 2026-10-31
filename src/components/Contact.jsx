@@ -10,11 +10,7 @@ export default function Contact() {
     const [selectedValue, setSelectedValue] = useState("");
 
     const handleRadioClick = (value) => {
-        if (selectedValue === value) {
-            setSelectedValue("");
-        } else {
-            setSelectedValue(value);
-        }
+        setSelectedValue(selectedValue === value ? "" : value);
     };
 
     return (
@@ -30,7 +26,7 @@ export default function Contact() {
                             value={contact.name}
                             checked={selectedValue === contact.name}
                             onClick={() => handleRadioClick(contact.name)}
-                            onChange={() => { }}
+                            onChange={() => {}}
                         />
 
                         <label htmlFor={`contact-${contact.name}`}>{contact.label}</label>

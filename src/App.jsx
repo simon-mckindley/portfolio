@@ -55,7 +55,6 @@ function App() {
     if (showContact) {
       const rect = contactRef?.current.getBoundingClientRect();
       setButtonCoords({ x: rect.x, y: rect.bottom });
-      // console.log({ x: rect.x, y: rect.y, width: rect.width, height: rect.height });
     }
   }, [showContact]);
 
@@ -68,7 +67,6 @@ function App() {
     if (showAbout) {
       const rect = aboutRef?.current.getBoundingClientRect();
       setButtonCoords({ x: rect.x, y: rect.bottom });
-      // console.log({ x: rect.x, y: rect.y, width: rect.width, height: rect.height });
     }
   }, [showAbout]);
 
