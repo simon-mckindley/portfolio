@@ -1,31 +1,5 @@
 import { useState, useEffect } from "react";
-
-const SkillsItem = ({ skillItem, onSkillClick }) => {
-    return (
-        <li className="skill-item">
-            <div className="title">{skillItem.title}</div>
-            <div className="item-list">
-                <div className="scroll-container">
-                    {skillItem.skills.map((skill, i) => (
-                        <>
-                            <input
-                                key={i}
-                                type="checkbox"
-                                id={skill}
-                                name="skill-check"
-                                value={skill}
-                                title="Add filter"
-                                onClick={() => onSkillClick(skill)}
-                                />
-
-                            <label key={i} htmlFor={skill}>{skill}</label>
-                        </>
-                    ))}
-                </div>
-            </div>
-        </li>
-    );
-};
+import SkillsItem from "./SkillsItem";
 
 export default function Skills({ onSkillClick }) {
     const includeList = [

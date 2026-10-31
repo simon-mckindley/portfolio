@@ -367,6 +367,7 @@ header {
 
     .skill-item {
       .item-list {
+        position: relative;
         background-color: rgba(255, 255, 255, 0.5);
         padding: 0.5rem 0.5rem;
         margin-inline: -0.5rem;
@@ -397,33 +398,28 @@ header {
           outline-offset: -2px;
           transition: outline 300ms;
         }
+
+        button {
+          position: absolute;
+          top: 0;
+          padding: 0.63rem;
+          opacity: 0.75;
+          --_inline-pos: -1.3rem;
+
+          &.left-button {
+            left: var(--_inline-pos);
+          }
+
+          &.right-button {
+            right: var(--_inline-pos);
+          }
+
+          img {
+            width: 1.5rem;
+          }
+        }
       }
     }
-
-    li:nth-child(2) {
-      --_delay: 200ms;
-    }
-
-    li:nth-child(3) {
-      --_delay: 300ms;
-    }
-
-    li:nth-child(4) {
-      --_delay: 400ms;
-    }
-
-    li:nth-child(5) {
-      --_delay: 500ms;
-    }
-
-    li:nth-child(6) {
-      --_delay: 600ms;
-    }
-
-    li:nth-child(7) {
-      --_delay: 700ms;
-    }
-
   }
 }
 
