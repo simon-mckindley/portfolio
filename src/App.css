@@ -401,17 +401,27 @@ header {
 
         button {
           position: absolute;
-          top: 0;
-          padding: 0.63rem;
+          top: 0.2rem;
+          padding: 0.4rem;
           transition: opacity 300ms;
-          --_inline-pos: -1.3rem;
+          --_inline-pos: -1rem;
 
           &.left-button {
             left: var(--_inline-pos);
+            background:
+              linear-gradient(to right,
+                transparent 50%,
+                rgba(255, 255, 255, 0.6) 50%,
+                transparent 100%);
           }
 
           &.right-button {
             right: var(--_inline-pos);
+            background:
+              linear-gradient(to left,
+                transparent 50%,
+                rgba(255, 255, 255, 0.6) 50%,
+                transparent 100%);
 
             img {
               rotate: 180deg;
@@ -586,14 +596,3 @@ header {
     rotate: 0deg;
   }
 }
-
-/* Media Queries */
-/* @media screen and (max-width: 520px) {
-  .contact-info {
-    justify-content: start;
-  }
-
-  .projects-container .projects-header .filter-cont .clear-filters {
-    margin-inline: 0;
-  }
-} */
