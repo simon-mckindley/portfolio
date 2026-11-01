@@ -403,7 +403,7 @@ header {
           position: absolute;
           top: 0;
           padding: 0.63rem;
-          opacity: 0.75;
+          transition: opacity 300ms;
           --_inline-pos: -1.3rem;
 
           &.left-button {
@@ -412,10 +412,19 @@ header {
 
           &.right-button {
             right: var(--_inline-pos);
+
+            img {
+              rotate: 180deg;
+            }
           }
 
           img {
             width: 1.5rem;
+          }
+
+          &.hide {
+            opacity: 0;
+            pointer-events: none;
           }
         }
       }

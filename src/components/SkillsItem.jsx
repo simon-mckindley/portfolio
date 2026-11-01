@@ -1,29 +1,46 @@
-import { useState, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import LeftIcon from '../assets/circle-chevron-left-solid-full.svg';
 
 export default function SkillsItem({ skillItem, onSkillClick }) {
     const scrollContRef = useRef(null);
     const [isOverflow, setIsOverflow] = useState(undefined);
+    const [isAtEnd, setIsAtEnd] = useState(false);
+    const [isAtStart, setIsAtStart] = useState(true);
 
     useLayoutEffect(() => {
         const { current } = scrollContRef;
+        if (!current) return;
 
         const trigger = () => {
             const hasOverflow = current.scrollWidth > current.clientWidth;
             setIsOverflow(hasOverflow);
         };
 
-        if (current) {
-            new ResizeObserver(trigger).observe(current);
-            trigger();
-        }
+        new ResizeObserver(trigger).observe(current);
+        trigger();
     }, [scrollContRef]);
 
-    const handleScroll = (isLeft) => {
+    useEffect(() => {
         const { current } = scrollContRef;
         if (!current) return;
-        
+
+        const handleScrollEnd = () => {
+            const { scrollLeft, scrollWidth, clientWidth } = current;
+            const isEnd = Math.ceil(scrollLeft + clientWidth) >= scrollWidth - 1;
+            setIsAtEnd(isEnd);
+            setIsAtStart(scrollLeft <= 1);
+        };
+
+        current.addEventListener('scrollend', handleScrollEnd);
+        return () => current.removeEventListener('scrollend', handleScrollEnd);
+    }, []);
+
+    const handleScrollClick = (isLeft) => {
+        const { current } = scrollContRef;
+        if (!current) return;
+
         let scroll = 150;
-        if (isLeft) scroll*=-1;
+        if (isLeft) scroll *= -1;
 
         current.scrollBy({ left: scroll, behavior: 'smooth' });
     }
@@ -55,20 +72,20 @@ export default function SkillsItem({ skillItem, onSkillClick }) {
                     <>
                         <button 
                             type="button" 
-                            className="left-button" 
+                            className={`left-button ${isAtStart ? "hide" : ""}`} 
                             title="Scroll left"
-                            onClick={() => handleScroll(true)}
+                            onClick={() => handleScrollClick(true)}
                         >
-                            <img src="/circle-chevron-left-solid-full.svg" alt="<" width="24" />
+                            <img src={LeftIcon} alt="<" width="24" />
                         </button>
 
                         <button 
                             type="button" 
-                            className="right-button" 
+                            className={`right-button ${isAtEnd ? "hide" : ""}`}  
                             title="Scroll right"
-                            onClick={() => handleScroll(false)}
+                            onClick={() => handleScrollClick(false)}
                         >
-                            <img src="/circle-chevron-right-solid-full.svg" alt=">" width="24" />
+                            <img src={LeftIcon} alt=">" width="24" />
                         </button>
                     </>
                 )}
