@@ -12,34 +12,10 @@ import Skills from './components/Skills'
 import ThemeButton from './components/ThemeButton'
 
 function App() {
-  const [filters, setFilters] = useState([]); // State to track selected filters
+  const [filters, setFilters] = useState([]);
   const [darkMode, setDarkMode] = useState(() => {
     return JSON.parse(sessionStorage.getItem("portfolio-dark")) || false;
   });
-
-  useEffect(() => {
-    document.body.classList.toggle("dark", darkMode);
-    sessionStorage.setItem("portfolio-dark", JSON.stringify(darkMode));
-  }, [darkMode]);
-
-  // Function to add a filter
-  const handleSkillClick = (skill) => {
-    setFilters((prevFilters) => {
-      if (prevFilters.includes(skill)) return prevFilters; // Avoid duplicates
-      return [...prevFilters, skill]; // Add new filter
-    });
-  };
-
-  // Function to remove a filter
-  const handleFilterClick = (skill) => {
-    setFilters((prevFilters) => prevFilters.filter((filter) => filter !== skill));
-  };
-
-  // Function to clear all filters
-  const handleClearFilters = () => {
-    setFilters([]);
-  }
-
   const [showContact, setShowContact] = useState(false);
   const contactRef = useRef(null);
   const [showAbout, setShowAbout] = useState(false);
@@ -70,6 +46,29 @@ function App() {
     }
   }, [showAbout]);
 
+  useEffect(() => {
+    document.body.classList.toggle("dark", darkMode);
+    sessionStorage.setItem("portfolio-dark", JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  // Function to add a filter
+  const handleSkillClick = (skill) => {
+    setFilters((prevFilters) => {
+      if (prevFilters.includes(skill)) return prevFilters; // Avoid duplicates
+      return [...prevFilters, skill]; // Add new filter
+    });
+  };
+
+  // Function to remove a filter
+  const handleFilterClick = (skill) => {
+    setFilters((prevFilters) => prevFilters.filter((filter) => filter !== skill));
+  };
+
+  // Function to clear all filters
+  const handleClearFilters = () => {
+    setFilters([]);
+  }
+
   return (
     <>
       <ThemeButton onClick={() => setDarkMode(prev => !prev)} />
@@ -89,7 +88,8 @@ function App() {
           <div id="feature">
             <ProjectCard 
               heading={"Featured project"} 
-              project={ {title: "Feature prohject", description: "Project description", technologies: ["React", "CSS"], link: "link", code: "link"}} 
+              isFeature={true}
+              project={ {title: "ClanCalendar", image: "/Screenshot.png", description: "Project description", technologies: ["React", "CSS"], link: "link", code: "link"}} 
             />
           </div>
 

@@ -6,6 +6,7 @@ import FilterItem from "./FilterItem";
 export default function ProjectList({ filters, onFilterClick, onClearFilters }) {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [filteredProjects, setFilteredProjects] = useState([]);
     const [showProjects, setShowProjects] = useState(true); // Animation control
 
@@ -17,7 +18,10 @@ export default function ProjectList({ filters, onFilterClick, onClearFilters }) 
                 setFilteredProjects(data);
                 setLoading(false);
             })
-            .catch((error) => console.error("Error fetching projects:", error.message));
+            .catch((error) => {
+                console.error("Error fetching projects:", error.message);
+                setError(true);
+            });
     }, []);
 
     useEffect(() => {
@@ -53,21 +57,20 @@ export default function ProjectList({ filters, onFilterClick, onClearFilters }) 
     }, [filters, projects]);
 
     if (loading) return (
-        <section className="projects-container defined-section">
-            <div className="projects-header">
+        <section className="projects-section">
+            {/* <div className="projects-header">
                 <h3>Projects</h3>
-            </div>
+            </div> */}
             <div className="loading">
-                Loading projects
+                {error ? 'Error loading, try again' : 'Loading projects'}
                 <div>.</div><div>.</div><div>.</div>
             </div>
         </section>
     );
 
     return (
-        <section className="projects-container defined-section">
+        <section className="projects-section">
             <div className="projects-header">
-                <h3>Projects</h3>
                 {showProjects && filters.length > 0 && (
                     <div className="projects-count">({filteredProjects.length})</div>
                 )}

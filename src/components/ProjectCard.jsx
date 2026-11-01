@@ -1,8 +1,11 @@
 
-export default function ProjectCard({ heading = "Project", project, show = true }) {
+export default function ProjectCard({ heading = "Project", isFeature = false, project, show = true }) {
     return (
-        <div className={`bento-card project-card ${show ? "fade-in" : "fade-out"}`}>
+        <div className={`bento-card project-card ${isFeature ? "feature" : ""} ${show ? "fade-in" : "fade-out"}`}>
             <h3 className="card-heading">{heading}</h3>
+            {isFeature && (
+                <img className="project-image" src={project.image} alt="Project Image" width="400" />
+            )}
             <h4>{project.title}</h4>
             <p>{project.description}</p>
             <div className="project-tech">

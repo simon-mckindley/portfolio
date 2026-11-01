@@ -2,7 +2,7 @@
 export default function Headline() {
     return (
         <section className="headline">
-            <p className="headline-upper">Software engineer</p>
+            <h3 className="headline-upper">Software engineer</h3>
 
             <h2>Building useful software for real people</h2>
 
