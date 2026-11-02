@@ -12,10 +12,10 @@ import Skills from './components/Skills'
 import ThemeButton from './components/ThemeButton'
 
 function App() {
-  const [filters, setFilters] = useState([]);
   const [darkMode, setDarkMode] = useState(() => {
     return JSON.parse(sessionStorage.getItem("portfolio-dark")) || false;
   });
+  const [filters, setFilters] = useState([]);
   const [showContact, setShowContact] = useState(false);
   const contactRef = useRef(null);
   const [showAbout, setShowAbout] = useState(false);
@@ -112,7 +112,10 @@ function App() {
           </div>
 
           <div id="skills">
-            <Skills onSkillClick={handleSkillClick} />
+            <Skills 
+              onSkillClick={handleSkillClick} 
+              filters={filters}
+            />
           </div>
           
         </section>

@@ -1,8 +1,8 @@
 import LinkIcon from '../assets/arrow-up-right-from-square-solid-full.svg';
 
-export default function ProjectCard({ heading = "Project", isFeature = false, project, show = true }) {
+export default function ProjectCard({ heading = "Project", isFeature = false, project, show }) {
     return (
-        <div className={`bento-card project-card ${project.type === 'featured' ? "highlight" : ""} ${isFeature ? "feature" : ""} ${show ? "fade-in" : "fade-out"}`}>
+        <div className={`bento-card project-card ${project.type === 'featured' ? "highlight" : ""} ${isFeature ? "feature" : ""} ${show ? "fade-in" : ""}`}>
             <h3 className="card-heading">{heading}</h3>
 
             {isFeature && (

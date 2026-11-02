@@ -1,7 +1,7 @@
 import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import LeftIcon from '../assets/circle-chevron-left-solid-full.svg';
 
-export default function SkillsItem({ skillItem, onSkillClick }) {
+export default function SkillsItem({ skillItem, onSkillClick, filters }) {
     const scrollContRef = useRef(null);
     const [isOverflow, setIsOverflow] = useState(undefined);
     const [isAtEnd, setIsAtEnd] = useState(false);
@@ -58,11 +58,18 @@ export default function SkillsItem({ skillItem, onSkillClick }) {
                                 id={skill}
                                 name="skill-check"
                                 value={skill}
-                                title="Add filter"
+                                checked={filters.includes(skill)}
                                 onClick={() => onSkillClick(skill)}
+                                onChange={() => {}}
                             />
 
-                            <label key={i} htmlFor={skill}>{skill}</label>
+                            <label 
+                                key={i} 
+                                htmlFor={skill}
+                                title="Click to filter projects"
+                            >
+                                {skill}
+                            </label>
                         </>
                     ))}
 

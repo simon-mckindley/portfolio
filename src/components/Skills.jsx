@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import SkillsItem from "./SkillsItem";
 
-export default function Skills({ onSkillClick }) {
+export default function Skills({ onSkillClick, filters }) {
     const includeList = [
         "Programming Languages",
         "Frameworks & Libraries",
@@ -41,6 +41,7 @@ export default function Skills({ onSkillClick }) {
                                 key={index}
                                 skillItem={skillItem}
                                 onSkillClick={onSkillClick}
+                                filters={filters}
                             />
                     ))}
                 </ul>

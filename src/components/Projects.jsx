@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
-import FilterItem from "./FilterItem";
 
 
 export default function ProjectList({ filters, onClearFilters }) {
@@ -29,7 +28,7 @@ export default function ProjectList({ filters, onClearFilters }) {
         setShowProjects(false);
 
         // Wait for animation duration, then filter projects
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             const newFilteredProjects =
                 filters.length === 0
                     ? projects
@@ -53,7 +52,9 @@ export default function ProjectList({ filters, onClearFilters }) {
 
             setFilteredProjects(sortedProjects);
             setShowProjects(true); // Fade projects back in
-        }, 300); // This should match the CSS fade-out duration
+        }, 600); // This should match the CSS fade-out duration
+
+        return () => clearTimeout(timer); // Cleanup timer on unmount or filter change
     }, [filters, projects]);
 
     if (loading) return (

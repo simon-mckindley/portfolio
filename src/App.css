@@ -428,6 +428,7 @@ header {
 
 /* Projects */
 .projects-section {
+  min-height: 18rem;
 
   .loading {
     margin-block: 5rem;
@@ -466,7 +467,7 @@ header {
 
     .filter-cont {
       display: flex;
-      gap: 0.5rem 1rem;
+      gap: 0.5rem;
       align-items: center;
       flex-wrap: wrap;
 
@@ -497,19 +498,24 @@ header {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--grid-gap);
   margin-block-end: 2rem;
-  min-height: 10rem;
 }
 
 .project-card {
   position: relative;
   background-color: var(--color-card-3);
+  opacity: 0;
 
   &.feature {
+    opacity: 1;
     background-color: var(--color-card-1);
   }
 
   &.highlight {
     background-color: var(--color-card-2);
+  }
+
+  &:only-child:not(.feature) {
+    max-width: 27rem;
   }
 
   h4 {
@@ -560,34 +566,18 @@ header {
       }
     }
   }
+
+  &.fade-in:not(.feature) {
+    animation: fade-in 600ms forwards;
+  }
 }
 
-
-/* Filter Item */
-.filter-item {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  border: 1px solid var(--highlight-light);
-  border-radius: 4px;
-  box-shadow: 1px 1px 6px 0px var(--card-shadow-color);
-  overflow: hidden;
-  /* opacity: 0; */
-  /* animation: up-in 300ms ease forwards; */
-
-  span {
-    font-size: 0.9rem;
-    padding-inline: 0.5rem;
+@keyframes fade-in {
+  0% {
+    opacity: 0;
   }
 
-  button {
-    padding: 0;
-    background-color: var(--highlight-light);
-    cursor: pointer;
-    transition: background-color 300ms;
-  }
-
-  button:hover {
-    background-color: var(--highlight);
+  100% {
+    opacity: 1;
   }
 }
