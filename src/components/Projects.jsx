@@ -68,12 +68,17 @@ export default function ProjectList({ filters, onClearFilters }) {
     return (
         <section className="projects-section">
             <div className="projects-header">
+                <div className="projects-count">
+                {showProjects && (
+                    <span>({filteredProjects.length})</span>
+                )}
+                </div>
+
+                <span className="label">Filters:</span>
+
                 {filters.length > 0 && (
                     <div className="filter-cont">
-                        {showProjects && (
-                            <div className="projects-count">({filteredProjects.length})</div>
-                        )}
-                        Filters:
+
                         {filters.map((filter, i) => (
                             <div key={i} className="filter">{filter}</div>
                         ))}
@@ -83,7 +88,8 @@ export default function ProjectList({ filters, onClearFilters }) {
                                 type="button"
                                 className="clear-filters"
                                 title="Clear all filters"
-                                onClick={onClearFilters} >
+                                onClick={onClearFilters} 
+                            >
                                     Clear All
                             </button>
                         )}
