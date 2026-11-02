@@ -3,7 +3,7 @@ import ProjectCard from "./ProjectCard";
 import FilterItem from "./FilterItem";
 
 
-export default function ProjectList({ filters, onFilterClick, onClearFilters }) {
+export default function ProjectList({ filters, onClearFilters }) {
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -58,11 +58,8 @@ export default function ProjectList({ filters, onFilterClick, onClearFilters }) 
 
     if (loading) return (
         <section className="projects-section">
-            {/* <div className="projects-header">
-                <h3>Projects</h3>
-            </div> */}
             <div className="loading">
-                {error ? 'Error loading, try again' : 'Loading projects'}
+                {error ? 'Error loading projects, try again' : 'Loading projects'}
                 <div>.</div><div>.</div><div>.</div>
             </div>
         </section>
@@ -71,20 +68,14 @@ export default function ProjectList({ filters, onFilterClick, onClearFilters }) 
     return (
         <section className="projects-section">
             <div className="projects-header">
-                {showProjects && filters.length > 0 && (
-                    <div className="projects-count">({filteredProjects.length})</div>
-                )}
                 {filters.length > 0 && (
                     <div className="filter-cont">
+                        {showProjects && (
+                            <div className="projects-count">({filteredProjects.length})</div>
+                        )}
                         Filters:
-                        {filters.map((filter, index) => (
-                            <FilterItem
-                                key={index}
-                                itemName={filter}
-                                onFilterClick={() =>
-                                    onFilterClick(filter)
-                                }
-                            />
+                        {filters.map((filter, i) => (
+                            <div key={i} className="filter">{filter}</div>
                         ))}
 
                         {showProjects && (filters.length > 1) && (

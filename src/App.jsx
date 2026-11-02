@@ -51,17 +51,15 @@ function App() {
     sessionStorage.setItem("portfolio-dark", JSON.stringify(darkMode));
   }, [darkMode]);
 
-  // Function to add a filter
+  // Function to toggle a filter
   const handleSkillClick = (skill) => {
     setFilters((prevFilters) => {
-      if (prevFilters.includes(skill)) return prevFilters; // Avoid duplicates
-      return [...prevFilters, skill]; // Add new filter
+      if (prevFilters.includes(skill)) {
+        return prevFilters.filter((filter) => filter !== skill); // Remove filter
+      } else {
+        return [...prevFilters, skill]; // Add new filter
+      }
     });
-  };
-
-  // Function to remove a filter
-  const handleFilterClick = (skill) => {
-    setFilters((prevFilters) => prevFilters.filter((filter) => filter !== skill));
   };
 
   // Function to clear all filters
@@ -121,7 +119,6 @@ function App() {
 
         <ProjectList
           filters={filters}
-          onFilterClick={handleFilterClick}
           onClearFilters={handleClearFilters}
         />
       </main>
