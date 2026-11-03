@@ -24,7 +24,6 @@ export default function ProjectList({ filters, onClearFilters }) {
     }, []);
 
     useEffect(() => {
-        // When filters change, trigger fade-out animation
         setShowProjects(false);
 
         // Wait for animation duration, then filter projects
@@ -52,7 +51,7 @@ export default function ProjectList({ filters, onClearFilters }) {
 
             setFilteredProjects(sortedProjects);
             setShowProjects(true); // Fade projects back in
-        }, 600); // This should match the CSS fade-out duration
+        }, 300);
 
         return () => clearTimeout(timer); // Cleanup timer on unmount or filter change
     }, [filters, projects]);
@@ -101,6 +100,12 @@ export default function ProjectList({ filters, onClearFilters }) {
                 {filteredProjects.map((project, index) => (
                     <ProjectCard key={index} project={project} show={showProjects} />
                 ))}
+
+                {filteredProjects.length === 0 && (
+                    <div className="no-projects">
+                        <p>No projects match the selected filters.</p>
+                    </div>
+                )}
             </div>
         </section>
     );

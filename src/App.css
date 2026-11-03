@@ -337,8 +337,8 @@ header {
 .skills-card {
   background-color: var(--color-card-5);
 
-  .card-heading {
-    margin-block-end: 0.5rem;
+  .loading {
+    min-height: 13rem;
   }
 
   .skills-list {
@@ -347,6 +347,7 @@ header {
     row-gap: 0.5rem;
     justify-content: space-evenly;
     flex-grow: 1;
+    min-height: 13rem;
 
     .skill-item {
       .item-list {
@@ -432,20 +433,26 @@ header {
 
   .loading {
     margin-block: 5rem;
+    justify-content: center;
   }
 
+  .no-projects {
+    margin: 2rem auto;
+    justify-content: center;
+  } 
+  
   .projects-header {
     display: flex;
     align-items: start;
     column-gap: 0.5rem;
     max-height: 0rem;
     margin-inline-start: 1rem;
-    margin-block-end: 0.5rem;
     overflow: hidden;
     transition: max-height 600ms 300ms ease;
-
+    
     &:has(.filter-cont) {
       max-height: 6rem;
+      margin-block-end: 0.5rem;
 
       .projects-count,
       .label {
