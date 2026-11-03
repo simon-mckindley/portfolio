@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
-
+import apiRequest from "../api/apiRequest";
 
 export default function ProjectList({ filters, onClearFilters }) {
     const [projects, setProjects] = useState([]);
@@ -10,8 +10,7 @@ export default function ProjectList({ filters, onClearFilters }) {
     const [showProjects, setShowProjects] = useState(true); // Animation control
 
     useEffect(() => {
-        fetch("https://profile-backend-6f74f72dedfc.herokuapp.com/projects") // Fetch projects from the server
-            .then((response) => response.json())
+        apiRequest({ projects: true }) // Fetch projects using the API function
             .then((data) => {
                 setProjects(data);
                 setFilteredProjects(data);
@@ -60,7 +59,7 @@ export default function ProjectList({ filters, onClearFilters }) {
         <section className="projects-section">
             <div className="loading">
                 {error ? 'Error loading projects, try again' : 'Loading projects'}
-                <div>.</div><div>.</div><div>.</div>
+                {!error && (<><div>.</div><div>.</div><div>.</div></>)}
             </div>
         </section>
     );
@@ -69,9 +68,9 @@ export default function ProjectList({ filters, onClearFilters }) {
         <section className="projects-section">
             <div className="projects-header">
                 <div className="projects-count">
-                {showProjects && (
-                    <span>({filteredProjects.length})</span>
-                )}
+                    {showProjects && (
+                        <span>({filteredProjects.length})</span>
+                    )}
                 </div>
 
                 <span className="label">Filters:</span>
@@ -88,9 +87,9 @@ export default function ProjectList({ filters, onClearFilters }) {
                                 type="button"
                                 className="clear-filters"
                                 title="Clear all filters"
-                                onClick={onClearFilters} 
+                                onClick={onClearFilters}
                             >
-                                    Clear All
+                                Clear All
                             </button>
                         )}
                     </div>

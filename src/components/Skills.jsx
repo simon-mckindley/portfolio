@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import SkillsItem from "./SkillsItem";
+import apiRequest from "../api/apiRequest";
 
 export default function Skills({ onSkillClick, filters }) {
     const includeList = [
@@ -12,8 +13,7 @@ export default function Skills({ onSkillClick, filters }) {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        fetch("https://profile-backend-6f74f72dedfc.herokuapp.com/skills")
-            .then((response) => response.json())
+        apiRequest({ skills: true }) // Fetch skills using the API function
             .then((data) => {
                 setSkillsList(data);
                 setLoading(false);
@@ -30,7 +30,7 @@ export default function Skills({ onSkillClick, filters }) {
             {loading ? (
                 <div className="loading">
                     {error ? 'Error loading, try again' : 'Loading skills'}
-                    <div>.</div><div>.</div><div>.</div>
+                    {!error && (<><div>.</div><div>.</div><div>.</div></>)}
                 </div>
             ) : (
                 <ul className="skills-list">
@@ -43,7 +43,7 @@ export default function Skills({ onSkillClick, filters }) {
                                 onSkillClick={onSkillClick}
                                 filters={filters}
                             />
-                    ))}
+                        ))}
                 </ul>
             )}
         </div>

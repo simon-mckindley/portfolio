@@ -1,6 +1,6 @@
 
 export default function About() {
-    return (            
+    return (
         <>
             <h3 className="card-heading">About</h3>
             <div>

@@ -16,7 +16,7 @@ export default function Header({ onContactClick, showContact, onAboutClick, show
 
                 <div className="header-links">
                     <button
-                        ref={aboutRef} 
+                        ref={aboutRef}
                         type="button"
                         className={`contact-button ${showAbout ? "show" : ""}`}
                         onClick={onAboutClick}

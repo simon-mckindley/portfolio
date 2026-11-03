@@ -44,7 +44,7 @@ export default function SkillsItem({ skillItem, onSkillClick, filters }) {
 
         current.scrollBy({ left: scroll, behavior: 'smooth' });
     }
-    
+
     return (
         <li className="skill-item">
             <div className="title">{skillItem.title}</div>
@@ -60,11 +60,11 @@ export default function SkillsItem({ skillItem, onSkillClick, filters }) {
                                 value={skill}
                                 checked={filters.includes(skill)}
                                 onClick={() => onSkillClick(skill)}
-                                onChange={() => {}}
+                                onChange={() => { }}
                             />
 
-                            <label 
-                                key={i} 
+                            <label
+                                key={i}
                                 htmlFor={skill}
                                 title="Click to filter projects"
                             >
@@ -77,18 +77,18 @@ export default function SkillsItem({ skillItem, onSkillClick, filters }) {
 
                 {isOverflow && (
                     <>
-                        <button 
-                            type="button" 
-                            className={`left-button ${isAtStart ? "hide" : ""}`} 
+                        <button
+                            type="button"
+                            className={`left-button ${isAtStart ? "hide" : ""}`}
                             title="Scroll left"
                             onClick={() => handleScrollClick(true)}
                         >
                             <img src={LeftIcon} alt="<" width="24" />
                         </button>
 
-                        <button 
-                            type="button" 
-                            className={`right-button ${isAtEnd ? "hide" : ""}`}  
+                        <button
+                            type="button"
+                            className={`right-button ${isAtEnd ? "hide" : ""}`}
                             title="Scroll right"
                             onClick={() => handleScrollClick(false)}
                         >
@@ -100,5 +100,5 @@ export default function SkillsItem({ skillItem, onSkillClick, filters }) {
             </div>
         </li>
     );
-    
+
 }

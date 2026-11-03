@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function TranslateCard({ 
-    content, 
-    contentClass, 
-    show, 
-    buttonX, 
-    buttonY 
+export default function TranslateCard({
+    content,
+    contentClass,
+    show,
+    buttonX,
+    buttonY
 }) {
     const containerRef = useRef(null);
     const [translateX, setTranslateX] = useState(0);
@@ -30,8 +30,8 @@ export default function TranslateCard({
         setTranslateY(buttonY - position.y);
     }, [show, buttonX, buttonY, containerRef]);
 
-    return (          
-        <div 
+    return (
+        <div
             ref={containerRef}
             className={`bento-card translate-card ${contentClass} ${show ? "show" : ""}`}
             style={{ "--_translateX": `${translateX}px`, "--_translateY": `${translateY}px` }}

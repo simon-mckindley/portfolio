@@ -14,19 +14,19 @@ export default function Contact() {
     };
 
     return (
-        <>        
+        <>
             <h3 className="card-heading">Contact me</h3>
             <ul className="contact-list">
                 {contactData.map((contact, i) => (
                     <li key={i} className="contact-item">
-                        <input 
-                            type="radio" 
-                            name="contact" 
-                            id={`contact-${contact.name}`} 
+                        <input
+                            type="radio"
+                            name="contact"
+                            id={`contact-${contact.name}`}
                             value={contact.name}
                             checked={selectedValue === contact.name}
                             onClick={() => handleRadioClick(contact.name)}
-                            onChange={() => {}}
+                            onChange={() => { }}
                         />
 
                         <label htmlFor={`contact-${contact.name}`}>{contact.label}</label>

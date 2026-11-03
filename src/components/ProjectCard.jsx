@@ -24,7 +24,7 @@ export default function ProjectCard({ heading = "Project", isFeature = false, pr
                     {project.link && (
                         <a href={project.link} target="_blank" rel="noopener noreferrer">
                             <img src={LinkIcon} alt="View Project" width="20" />
-                            <span>View Project</span>   
+                            <span>View Project</span>
                         </a>
                     )}
                 </div>
