@@ -1,26 +1,17 @@
 import { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
-import apiRequest from "../api/apiRequest";
 
-export default function ProjectList({ filters, onClearFilters }) {
-    const [projects, setProjects] = useState([]);
+export default function ProjectList({ projects, error, filters, onClearFilters }) {
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
     const [filteredProjects, setFilteredProjects] = useState([]);
     const [showProjects, setShowProjects] = useState(true); // Animation control
 
     useEffect(() => {
-        apiRequest({ projects: true }) // Fetch projects using the API function
-            .then((data) => {
-                setProjects(data);
-                setFilteredProjects(data);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error("Error fetching projects:", error.message);
-                setError(true);
-            });
-    }, []);
+        if (projects && projects.length > 0) {
+            setFilteredProjects(projects);
+            setLoading(false);
+        }
+    }, [projects]);
 
     useEffect(() => {
         setShowProjects(false);
@@ -47,6 +38,7 @@ export default function ProjectList({ filters, onClearFilters }) {
 
                 return a.title.localeCompare(b.title); // Alphabetical within group
             });
+console.log(sortedProjects, filters);
 
             setFilteredProjects(sortedProjects);
             setShowProjects(true); // Fade projects back in
@@ -96,8 +88,8 @@ export default function ProjectList({ filters, onClearFilters }) {
                 )}
             </div>
             <div className={`projects-grid`}>
-                {filteredProjects.map((project, index) => (
-                    <ProjectCard key={index} project={project} show={showProjects} />
+                {filteredProjects.map((project) => (
+                    <ProjectCard key={project._id} project={project} show={showProjects} />
                 ))}
 
                 {filteredProjects.length === 0 && (

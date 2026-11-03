@@ -16,7 +16,8 @@ function App() {
     const [darkMode, setDarkMode] = useState(() => {
         return JSON.parse(sessionStorage.getItem("portfolio-dark")) || false;
     });
-    // const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState([]);
+    const [projectsError, setProjectsError] = useState(false);
     const [filters, setFilters] = useState([]);
     const [showContact, setShowContact] = useState(false);
     const contactRef = useRef(null);
@@ -24,18 +25,16 @@ function App() {
     const aboutRef = useRef(null);
     const [buttonCoords, setButtonCoords] = useState({ x: 0, y: 0 })
 
-    // useEffect(() => {
-    //     apiRequest({ projects: true }) // Fetch projects using the API function
-    //         .then((data) => {
-    //             setProjects(data);
-    //             setFilteredProjects(data);
-    //             setLoading(false);
-    //         })
-    //         .catch((error) => {
-    //             console.error("Error fetching projects:", error.message);
-    //             setError(true);
-    //         });
-    // }, []);
+    useEffect(() => {
+        apiRequest({ projects: true })
+            .then((data) => {
+                setProjects(data);
+            })
+            .catch((error) => {
+                console.error("Error fetching projects:", error.message);
+                setProjectsError(true);
+            });
+    }, []);
 
     useEffect(() => {
         document.body.classList.toggle("dark", darkMode);
@@ -136,6 +135,8 @@ function App() {
                 </section>
 
                 <ProjectList
+                    projects={projects}
+                    error={projectsError}
                     filters={filters}
                     onClearFilters={handleClearFilters}
                 />

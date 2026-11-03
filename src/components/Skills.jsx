@@ -13,7 +13,7 @@ export default function Skills({ onSkillClick, filters }) {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        apiRequest({ skills: true }) // Fetch skills using the API function
+        apiRequest({ skills: true })
             .then((data) => {
                 setSkillsList(data);
                 setLoading(false);
@@ -36,9 +36,9 @@ export default function Skills({ onSkillClick, filters }) {
                 <ul className="skills-list">
                     {skillsList
                         .filter(skill => includeList.includes(skill.title))
-                        .map((skillItem, index) => (
+                        .map((skillItem, i) => (
                             <SkillsItem
-                                key={index}
+                                key={i}
                                 skillItem={skillItem}
                                 onSkillClick={onSkillClick}
                                 filters={filters}

@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, Fragment } from "react";
 import LeftIcon from '../assets/circle-chevron-left-solid-full.svg';
 
 export default function SkillsItem({ skillItem, onSkillClick, filters }) {
@@ -51,9 +51,8 @@ export default function SkillsItem({ skillItem, onSkillClick, filters }) {
             <div className="item-list">
                 <div ref={scrollContRef} className={`scroll-container ${isOverflow ? "overflow" : ""}`}>
                     {skillItem.skills.map((skill, i) => (
-                        <>
+                        <Fragment key={i}>
                             <input
-                                key={i + 100}
                                 type="checkbox"
                                 id={skill}
                                 name="skill-check"
@@ -64,13 +63,12 @@ export default function SkillsItem({ skillItem, onSkillClick, filters }) {
                             />
 
                             <label
-                                key={i}
                                 htmlFor={skill}
                                 title="Click to filter projects"
                             >
                                 {skill}
                             </label>
-                        </>
+                        </Fragment>
                     ))}
 
                 </div>
