@@ -18,6 +18,7 @@ function App() {
     });
     const [projects, setProjects] = useState([]);
     const [projectsError, setProjectsError] = useState(false);
+    const [featuredProject, setFeaturedProject] = useState(null);
     const [filters, setFilters] = useState([]);
     const [showContact, setShowContact] = useState(false);
     const contactRef = useRef(null);
@@ -35,6 +36,13 @@ function App() {
                 setProjectsError(true);
             });
     }, []);
+
+    useEffect(() => {
+        if (projects && projects.length > 0) {
+            const featured = projects.find(project => project.isFeatured);
+            setFeaturedProject(featured || null);
+        }
+    }, [projects]);
 
     useEffect(() => {
         document.body.classList.toggle("dark", darkMode);
@@ -101,7 +109,7 @@ function App() {
                         <ProjectCard
                             heading={"Featured project"}
                             isFeature={true}
-                            project={{ title: "ClanCalendar", image: "/Screenshot.png", description: "Project description", technologies: ["React", "CSS"], link: "link", code: "link" }}
+                            project={featuredProject}
                         />
                     </div>
 

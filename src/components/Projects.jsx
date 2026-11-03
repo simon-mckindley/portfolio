@@ -38,7 +38,6 @@ export default function ProjectList({ projects, error, filters, onClearFilters }
 
                 return a.title.localeCompare(b.title); // Alphabetical within group
             });
-console.log(sortedProjects, filters);
 
             setFilteredProjects(sortedProjects);
             setShowProjects(true); // Fade projects back in
