@@ -73,6 +73,15 @@ function App() {
         }
     }, [showAbout]);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowAbout(false);
+            setShowContact(false);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     // Function to toggle a filter
     const handleSkillClick = (skill) => {
         setFilters((prevFilters) => {

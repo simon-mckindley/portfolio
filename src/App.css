@@ -207,10 +207,6 @@ header {
   grid-template-columns: repeat(4, 1fr);
   margin-block-end: var(--grid-gap);
 
-  >* {
-    /* border: 1px solid red; */
-  }
-
   #feature {
     grid-area: feature;
   }
