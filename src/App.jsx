@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useLayoutEffect } from 'react'
 
 import './App.css'
 import Header from './components/Header'
@@ -49,28 +49,33 @@ function App() {
         sessionStorage.setItem("portfolio-dark", JSON.stringify(darkMode));
     }, [darkMode]);
 
-    const handleContactClick = () => {
-        setShowContact(prev => !prev);
-        setShowAbout(false);
-    }
+    const handleHeaderClick = (event) => {
+        const rect = event.currentTarget.getBoundingClientRect();
+        setButtonCoords({ x: rect.left, y: rect.bottom });
 
-    useEffect(() => {
-        if (showContact) {
-            const rect = contactRef?.current.getBoundingClientRect();
-            setButtonCoords({ x: rect.x, y: rect.bottom });
+        const buttonId = event.currentTarget.id;
+
+        if (buttonId === "contact-button") {
+            setShowContact(prev => !prev);
+            setShowAbout(false);
+        } else if (buttonId === "about-button") {
+            setShowAbout(prev => !prev);
+            setShowContact(false);
         }
+    };
+
+    useLayoutEffect(() => {
+        if (!showContact || !contactRef.current) return;
+
+        const rect = contactRef.current.getBoundingClientRect();
+        setButtonCoords({ x: rect.left, y: rect.bottom });
     }, [showContact]);
 
-    const handleAboutClick = () => {
-        setShowAbout(prev => !prev);
-        setShowContact(false);
-    }
+    useLayoutEffect(() => {
+        if (!showAbout || !aboutRef.current) return;
 
-    useEffect(() => {
-        if (showAbout) {
-            const rect = aboutRef?.current.getBoundingClientRect();
-            setButtonCoords({ x: rect.x, y: rect.bottom });
-        }
+        const rect = aboutRef.current.getBoundingClientRect();
+        setButtonCoords({ x: rect.left, y: rect.bottom });
     }, [showAbout]);
 
     useEffect(() => {
@@ -93,7 +98,6 @@ function App() {
         });
     };
 
-    // Function to clear all filters
     const handleClearFilters = () => {
         setFilters([]);
     }
@@ -102,10 +106,9 @@ function App() {
         <>
             <ThemeButton onClick={() => setDarkMode(prev => !prev)} />
             <Header
-                onContactClick={handleContactClick}
+                onHeaderClick={handleHeaderClick}
                 showContact={showContact}
                 contactRef={contactRef}
-                onAboutClick={handleAboutClick}
                 showAbout={showAbout}
                 aboutRef={aboutRef}
             />

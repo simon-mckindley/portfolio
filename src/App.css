@@ -112,7 +112,7 @@ header {
       button {
         padding: 0.25rem 1rem;
         border-radius: 8px;
-        transition: background-color 300ms;
+        transition: background-color 300ms 300ms;
 
         &.show {
           background-color: var(--color-card-1);
@@ -126,6 +126,7 @@ header {
 
       .header-links {
         margin-inline: 0;
+        margin-block-end: 0.125rem;
       }
     }
   }
