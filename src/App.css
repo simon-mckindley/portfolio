@@ -308,6 +308,62 @@ header {
 /* About */
 .about-card {
   background-color: var(--color-card-4);
+
+  .text-outer {
+    inset: 0 0 auto 0;
+    /* padding: var(--_padding-block) var(--_padding-inline); */
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    height: 100%;
+    max-height: 15rem;
+    border-radius: 20px;
+    background-color: var(--color-card-4);
+    transition: max-height 1200ms;
+  }
+
+  .text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    overflow: hidden;
+  }
+
+  button {
+    padding: 0.25rem 1rem;
+    border-radius: 8px;
+    border: 2px solid var(--color-light);
+    width: max-content;
+    margin-block-start: auto;
+    transition: background-color 300ms;
+
+    &:hover {
+      background-color: var(--color-light);
+    }
+  }
+
+  .less-button {
+    display: none;
+  }
+
+  .text-outer.open {
+    position: absolute;
+    padding: var(--_padding-block) var(--_padding-inline);
+    height: auto;
+    max-height: 30rem;
+    box-shadow: 3px 3px 8px 0px var(--color-shadow);
+    z-index: 200;
+
+    .text {
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
+    }
+  }
+
+  &:has(.open) {
+    position: relative;
+  }
 }
 
 
@@ -436,8 +492,8 @@ header {
   .no-projects {
     margin: 2rem auto;
     justify-content: center;
-  } 
-  
+  }
+
   .projects-header {
     display: flex;
     align-items: start;
@@ -446,7 +502,7 @@ header {
     margin-inline-start: 1rem;
     overflow: hidden;
     transition: max-height 600ms 300ms ease;
-    
+
     &:has(.filter-cont) {
       max-height: 6rem;
       margin-block-end: 0.5rem;

@@ -127,7 +127,7 @@ function App() {
 
                     <div id="about">
                         <TranslateCard
-                            content={<About />}
+                            content={<About closed />}
                             contentClass={'about-card'}
                             show={showAbout}
                             buttonX={buttonCoords.x}
