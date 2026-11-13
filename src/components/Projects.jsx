@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
-import FilterItem from "./FilterItem";
 
-
-export default function ProjectList({ filters, onFilterClick, onClearFilters }) {
-    const [projects, setProjects] = useState([]);
+export default function ProjectList({ projects, error, filters, onClearFilters }) {
     const [loading, setLoading] = useState(true);
     const [filteredProjects, setFilteredProjects] = useState([]);
     const [showProjects, setShowProjects] = useState(true); // Animation control
 
     useEffect(() => {
-        fetch("https://profile-backend-6f74f72dedfc.herokuapp.com/projects") // Fetch projects from the server
-            .then((response) => response.json())
-            .then((data) => {
-                setProjects(data);
-                setFilteredProjects(data);
-                setLoading(false);
-            })
-            .catch((error) => console.error("Error fetching projects:", error.message));
-    }, []);
+        if (projects && projects.length > 0) {
+            setFilteredProjects(projects);
+            setLoading(false);
+        }
+    }, [projects]);
 
     useEffect(() => {
-        // When filters change, trigger fade-out animation
         setShowProjects(false);
 
         // Wait for animation duration, then filter projects
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             const newFilteredProjects =
                 filters.length === 0
                     ? projects
@@ -49,39 +41,36 @@ export default function ProjectList({ filters, onFilterClick, onClearFilters }) 
 
             setFilteredProjects(sortedProjects);
             setShowProjects(true); // Fade projects back in
-        }, 300); // This should match the CSS fade-out duration
+        }, 300);
+
+        return () => clearTimeout(timer); // Cleanup timer on unmount or filter change
     }, [filters, projects]);
 
     if (loading) return (
-        <section className="projects-container defined-section">
-            <div className="projects-header">
-                <h3>Projects</h3>
-            </div>
+        <section className="projects-section">
             <div className="loading">
-                Loading projects
-                <div>.</div><div>.</div><div>.</div>
+                {error ? 'Error loading projects, try again' : 'Loading projects'}
+                {!error && (<><div>.</div><div>.</div><div>.</div></>)}
             </div>
         </section>
     );
 
     return (
-        <section className="projects-container defined-section">
+        <section className="projects-section">
             <div className="projects-header">
-                <h3>Projects</h3>
-                {showProjects && filters.length > 0 && (
-                    <div className="projects-count">({filteredProjects.length})</div>
-                )}
+                <div className="projects-count">
+                    {showProjects && (
+                        <span>({filteredProjects.length})</span>
+                    )}
+                </div>
+
+                <span className="label">Filters:</span>
+
                 {filters.length > 0 && (
                     <div className="filter-cont">
-                        Filters:
-                        {filters.map((filter, index) => (
-                            <FilterItem
-                                key={index}
-                                itemName={filter}
-                                onFilterClick={() =>
-                                    onFilterClick(filter)
-                                }
-                            />
+
+                        {filters.map((filter, i) => (
+                            <div key={i} className="filter">{filter}</div>
                         ))}
 
                         {showProjects && (filters.length > 1) && (
@@ -89,17 +78,24 @@ export default function ProjectList({ filters, onFilterClick, onClearFilters }) 
                                 type="button"
                                 className="clear-filters"
                                 title="Clear all filters"
-                                onClick={onClearFilters} >
-                                    Clear All
+                                onClick={onClearFilters}
+                            >
+                                Clear All
                             </button>
                         )}
                     </div>
                 )}
             </div>
             <div className={`projects-grid`}>
-                {filteredProjects.map((project, index) => (
-                    <ProjectCard key={index} project={project} show={showProjects} />
+                {filteredProjects.map((project) => (
+                    <ProjectCard key={project._id} project={project} show={showProjects} />
                 ))}
+
+                {filteredProjects.length === 0 && (
+                    <div className="no-projects">
+                        <p>No projects match the selected filters.</p>
+                    </div>
+                )}
             </div>
         </section>
     );

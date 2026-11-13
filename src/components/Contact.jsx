@@ -1,16 +1,51 @@
+import { useState } from 'react';
 
 export default function Contact() {
+    const contactData = [
+        { name: 'email', label: 'Email', href: 'mailto:simonmckindley@gmail.com', link: 'simonmckindley@gmail.com', blank: false },
+        { name: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/simon-mckindley/', link: 'linkedin.com/in/simon-mckindley', blank: true },
+        { name: 'github', label: 'GitHub', href: 'https://github.com/simon-mckindley', link: 'github.com/simon-mckindley', blank: true },
+    ];
+
+    const [selectedValue, setSelectedValue] = useState("");
+
+    const handleRadioClick = (value) => {
+        setSelectedValue(selectedValue === value ? "" : value);
+    };
+
     return (
-        <section className="contact">
-            <div className="contact-info">
-                <a className="contact-info-item" href="mailto:simonmckindley@gmail.com"><span>Email</span>simonmckindley@gmail.com</a>
-                <a className="contact-info-item" href="https://github.com/simon-mckindley" target="_blank"><span>GitHub</span>github.com/simon-mckindley</a>
-                <a className="contact-info-item" href="https://www.linkedin.com/in/simon-mckindley/" target="_blank"><span>LinkedIn</span>linkedin.com/in/simon-mckindley</a>
+        <>
+            <h3 className="card-heading">Contact me</h3>
+            <ul className="contact-list">
+                {contactData.map((contact, i) => (
+                    <li key={i} className="contact-item">
+                        <input
+                            type="radio"
+                            name="contact"
+                            id={`contact-${contact.name}`}
+                            value={contact.name}
+                            checked={selectedValue === contact.name}
+                            onClick={() => handleRadioClick(contact.name)}
+                            onChange={() => { }}
+                        />
+
+                        <label htmlFor={`contact-${contact.name}`}>{contact.label}</label>
+                    </li>
+                ))}
+            </ul>
+
+            <div className="link-container">
+                {contactData.map((contact, i) => (
+                    <a
+                        key={i}
+                        className={`contact-address ${selectedValue === contact.name ? "show" : ""}`}
+                        href={contact.href}
+                        target={contact.blank ? '_blank' : ''}
+                    >
+                        {contact.link}
+                    </a>
+                ))}
             </div>
-
-            <p>Hi, I'm Simon McKindley, a Full Stack Developer with experience in a wide variety of front-end and back-end technologies.</p>
-            <p>My goal is to create elegant code to build innovative solutions that solve realworld problems.</p>
-
-        </section>
+        </>
     );
 }
