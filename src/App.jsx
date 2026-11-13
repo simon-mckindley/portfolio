@@ -12,9 +12,11 @@ import Skills from './components/Skills'
 import ThemeButton from './components/ThemeButton'
 import apiRequest from './api/apiRequest'
 
+const SCHEME_KEY = "portfolio-dark";
+
 function App() {
     const [darkMode, setDarkMode] = useState(() => {
-        return JSON.parse(sessionStorage.getItem("portfolio-dark")) || false;
+        return JSON.parse(localStorage.getItem(SCHEME_KEY)) || undefined;
     });
     const [projects, setProjects] = useState([]);
     const [projectsError, setProjectsError] = useState(false);
@@ -45,8 +47,19 @@ function App() {
     }, [projects]);
 
     useEffect(() => {
-        document.body.classList.toggle("dark", darkMode);
-        sessionStorage.setItem("portfolio-dark", JSON.stringify(darkMode));
+        if (darkMode !== undefined) {
+            document.body.classList.toggle("dark", darkMode);
+            localStorage.setItem(SCHEME_KEY, JSON.stringify(darkMode));
+        } else {
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+            const handleChange = (event) => {
+                setDarkMode(event.matches);
+            };
+
+            mediaQuery.addEventListener('change', handleChange);
+            return () => mediaQuery.removeEventListener('change', handleChange);
+        }
     }, [darkMode]);
 
     const handleHeaderClick = (event) => {
