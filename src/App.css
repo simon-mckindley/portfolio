@@ -67,18 +67,11 @@ body {
   top: 1rem;
   right: 1rem;
   padding: 0.25rem;
-  border: 2px solid var(--card-bg-color);
   border-radius: 0.5rem;
-  background-color: var(--card-bg-color);
-  color: var(--alt-text-color);
-  box-shadow: 1px 1px 6px 0px var(--card-shadow-color);
-  cursor: pointer;
+  background-color: var(--color-light);
+  box-shadow: 1px 1px 6px 0px var(--color-shadow);
   z-index: 101;
   transition: border-color 300ms;
-
-  &:hover {
-    border-color: var(--highlight-light);
-  }
 }
 
 
@@ -112,9 +105,12 @@ header {
       button {
         padding: 0.25rem 1rem;
         border-radius: 8px;
-        transition: background-color 300ms 300ms;
+        transition-property: background-color, color;
+        transition-duration: 300ms;
+        transition-delay: 300ms;
 
         &.show {
+          color: var(--color-dark);
           background-color: var(--color-card-1);
         }
       }
@@ -150,6 +146,7 @@ header {
   padding: var(--_padding-block) var(--_padding-inline);
   border-radius: 20px;
   background-color: var(--color-card-1);
+  color: var(--color-dark);
 
   .card-heading {
     color: var(--color-header);
@@ -307,19 +304,15 @@ header {
 
 /* About */
 .about-card {
+  position: relative;
   background-color: var(--color-card-4);
 
   .text-outer {
-    inset: 0 0 auto 0;
-    /* padding: var(--_padding-block) var(--_padding-inline); */
     display: flex;
     flex-direction: column;
     row-gap: 0.5rem;
     height: 100%;
-    max-height: 15rem;
     border-radius: 20px;
-    background-color: var(--color-card-4);
-    transition: max-height 1200ms;
   }
 
   .text {
@@ -343,26 +336,44 @@ header {
     }
   }
 
-  .less-button {
-    display: none;
-  }
-
-  .text-outer.open {
+  .long-text-outer {
+    opacity: 0;
+    pointer-events: none;
     position: absolute;
+    inset: 0 0 auto 0;
     padding: var(--_padding-block) var(--_padding-inline);
-    height: auto;
-    max-height: 30rem;
-    box-shadow: 3px 3px 8px 0px var(--color-shadow);
-    z-index: 200;
+    /* max-height: 10rem; */
+    border-radius: 20px;
+    background-color: var(--color-card-4);
+    box-shadow: 3px 3px 8px 0px transparent;
+    overflow: hidden;
+    transition: box-shadow 1400ms;
 
-    .text {
-      -webkit-line-clamp: unset;
-      line-clamp: unset;
+    .long-text {
+      max-height: 8rem;
+      overflow: hidden;
+      transition: max-height 1400ms;
+
+      p {
+        margin-block-end: 0.25rem;
+      }
+    }
+
+    .less-button {
+      margin-block-start: 0.25rem;
     }
   }
 
-  &:has(.open) {
-    position: relative;
+  .open .long-text-outer {
+    opacity: 1;
+    pointer-events: all;
+    height: auto;
+    box-shadow: 3px 3px 8px 0px var(--color-shadow);
+    z-index: 200;
+
+    .long-text {
+      max-height: 30rem;
+    }
   }
 }
 
@@ -538,6 +549,7 @@ header {
       }
 
       .clear-filters {
+        color: var(--color-dark);
         background-color: var(--color-card-5);
         border-radius: 4px;
         padding: 0.25rem 0.5rem;

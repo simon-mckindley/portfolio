@@ -15,18 +15,12 @@ export default function About(closed = true) {
         <>
             <div className={`text-outer ${isClosed ? "" : "open"}`}>
                 <h3 className="card-heading">About</h3>
-                
+
                 <div className="text">
                     <p>
                         I'm a Melbourne-based front-end developer working primarily
                         with TypeScript and React.js. I enjoy building intuitive, responsive web experiences
                         and bringing ideas to life through thoughtful design and code.
-                    </p>
-                    <br />
-                    <p>
-                        With a background in software engineering, digital design,
-                        and team leadership, I bring a collaborative, practical approach
-                        to solving problems and creating useful products.
                     </p>
                 </div>
 
@@ -35,8 +29,34 @@ export default function About(closed = true) {
                     className="more-button"
                     onClick={() => handleReadMore()}
                 >
-                    {isClosed ? "Read More" : "Read Less"}
+                    Read More
                 </button>
+
+                <div className="long-text-outer text-outer">
+                    <h3 className="card-heading">About</h3>
+
+                    <div className="long-text">
+                        <p>
+                            I'm a Melbourne-based front-end developer working primarily
+                            with TypeScript and React.js. I enjoy building intuitive, responsive web experiences
+                            and bringing ideas to life through thoughtful design and code.
+                        </p>
+                        <p>
+                            With a background in software engineering, digital design,
+                            and team leadership, I bring a collaborative, practical approach
+                            to solving problems and creating useful products.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        className="less-button"
+                        onClick={() => handleReadMore()}
+                    >
+                        Read Less
+                    </button>
+                </div>
+
             </div>
         </>
     );
