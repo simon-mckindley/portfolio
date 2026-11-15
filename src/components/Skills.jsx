@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import SkillsItem from "./SkillsItem";
+import Loading from './Loading.jsx';
 import apiRequest from "../api/apiRequest";
 
 export default function Skills({ onSkillClick, filters }) {
@@ -28,10 +29,11 @@ export default function Skills({ onSkillClick, filters }) {
         <div className="bento-card skills-card">
             <h3 className="card-heading">Skills</h3>
             {loading ? (
-                <div className="loading">
-                    {error ? 'Error loading, try again' : 'Loading skills'}
-                    {!error && (<><div>.</div><div>.</div><div>.</div></>)}
-                </div>
+                <Loading
+                    loadingText='Loading skills'
+                    errorText='Skills failed to load'
+                    error={error}
+                />
             ) : (
                 <ul className="skills-list">
                     {skillsList

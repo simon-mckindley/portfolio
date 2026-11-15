@@ -1,14 +1,16 @@
+import Loading from './Loading.jsx';
 import LinkIcon from '../assets/arrow-up-right-from-square-solid-full.svg';
 
-export default function ProjectCard({ heading = "Project", isFeature = false, project, show }) {
+export default function ProjectCard({ heading = "Project", isFeature = false, error = false, project, show }) {
     if (!project) {
         return (
             <div className={`bento-card project-card ${isFeature ? "feature" : ""} ${show ? "fade-in" : ""}`}>
                 <h3 className="card-heading">{heading}</h3>
-                <div className="loading">
-                    Loading project
-                    <div>.</div><div>.</div><div>.</div>
-                </div>
+                <Loading
+                    loadingText='Loading project'
+                    errorText='Feature project failed to load'
+                    error={error}
+                />
             </div>
         );
     }

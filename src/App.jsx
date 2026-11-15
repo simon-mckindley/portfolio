@@ -137,6 +137,7 @@ function App() {
                         <ProjectCard
                             heading={"Featured project"}
                             isFeature={true}
+                            error={projectsError}
                             project={featuredProject}
                         />
                     </div>

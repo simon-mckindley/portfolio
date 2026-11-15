@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
+import Loading from './Loading.jsx';
 
 export default function ProjectList({ projects, error, filters, onClearFilters }) {
     const [loading, setLoading] = useState(true);
@@ -48,10 +49,11 @@ export default function ProjectList({ projects, error, filters, onClearFilters }
 
     if (loading) return (
         <section className="projects-section">
-            <div className="loading">
-                {error ? 'Error loading projects, try again' : 'Loading projects'}
-                {!error && (<><div>.</div><div>.</div><div>.</div></>)}
-            </div>
+            <Loading
+                loadingText='Loading projects'
+                errorText='Error loading projects'
+                error={error}
+            />
         </section>
     );
 
