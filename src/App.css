@@ -58,15 +58,44 @@ body {
 
 /* Theme Button */
 .theme-button {
+  --_fill-color: dimgrey;
   position: fixed;
   top: 1rem;
   right: 1rem;
   padding: 0.25rem;
   border-radius: 0.5rem;
-  background-color: var(--color-light);
+  background-color: var(--bg-color);
+  border: 1px solid var(--_fill-color);
   box-shadow: 1px 1px 6px 0px var(--color-shadow);
-  z-index: 101;
-  transition: border-color 300ms;
+  z-index: 1000;
+  transition: background-color 600ms, border-color 600ms;
+
+  svg {
+    width: 1rem;
+    fill: var(--_fill-color);
+    transition: fill 600ms;
+  }
+
+  .dark {
+    display: block;
+  }
+
+  .light {
+    display: none;
+  }
+}
+
+.dark .theme-button {
+  --_fill-color: rgb(128, 155, 155);
+  box-shadow: 1px 1px 6px 0px rgba(255, 255, 255, 0.5);
+
+  .dark {
+    display: none;
+  }
+
+  .light {
+    display: block;
+  }
 }
 
 
@@ -103,10 +132,16 @@ header {
         transition-property: background-color, color;
         transition-duration: 300ms;
         transition-delay: 300ms;
+      }
+      
+      .show {
+        color: var(--color-dark);
+        &#about-button {
+          background-color: var(--color-card-4);
+        }
 
-        &.show {
-          color: var(--color-dark);
-          background-color: var(--color-card-1);
+        &#contact-button {
+          background-color: var(--color-card-2);
         }
       }
     }
@@ -337,7 +372,6 @@ header {
     position: absolute;
     inset: 0 0 auto 0;
     padding: var(--_padding-block) var(--_padding-inline);
-    /* max-height: 10rem; */
     border-radius: 20px;
     background-color: var(--color-card-4);
     box-shadow: 3px 3px 8px 0px transparent;
@@ -364,11 +398,15 @@ header {
     pointer-events: all;
     height: auto;
     box-shadow: 3px 3px 8px 0px var(--color-shadow);
-    z-index: 200;
+    z-index: 50;
 
     .long-text {
       max-height: 30rem;
     }
+  }
+
+  &:has(.open) {
+    box-shadow: none;
   }
 }
 

@@ -52,15 +52,18 @@ function App() {
             localStorage.setItem(SCHEME_KEY, JSON.stringify(darkMode));
         } else {
             const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-            const handleChange = (event) => {
-                setDarkMode(event.matches);
-            };
-
-            mediaQuery.addEventListener('change', handleChange);
-            return () => mediaQuery.removeEventListener('change', handleChange);
+            setDarkMode(mediaQuery.matches);
         }
     }, [darkMode]);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+        const handleChange = (e) => setDarkMode(e.matches);
+
+        mediaQuery.addEventListener('change', handleChange);
+        return () => mediaQuery.removeEventListener('change', handleChange);
+    }, []);
 
     const handleHeaderClick = (event) => {
         const rect = event.currentTarget.getBoundingClientRect();

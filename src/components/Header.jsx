@@ -19,7 +19,7 @@ export default function Header({ onHeaderClick, showContact, showAbout, contactR
                         ref={aboutRef}
                         id="about-button"
                         type="button"
-                        className={`contact-button ${showAbout ? "show" : ""}`}
+                        className={`${showAbout ? "show" : ""}`}
                         onClick={onHeaderClick}
                     >
                         About
@@ -29,7 +29,7 @@ export default function Header({ onHeaderClick, showContact, showAbout, contactR
                         ref={contactRef}
                         id="contact-button"
                         type="button"
-                        className={`contact-button ${showContact ? "show" : ""}`}
+                        className={`${showContact ? "show" : ""}`}
                         onClick={onHeaderClick}
                     >
                         Contact
