@@ -12,11 +12,11 @@ import Skills from './components/Skills'
 import ThemeButton from './components/ThemeButton'
 import apiRequest from './api/apiRequest'
 
-const SCHEME_KEY = "portfolio-dark";
+const THEME_KEY = "portfolio-theme";
 
 function App() {
-    const [darkMode, setDarkMode] = useState(() => {
-        return JSON.parse(localStorage.getItem(SCHEME_KEY)) || undefined;
+    const [theme, setTheme] = useState(() => {
+        return document.body.getAttribute('data-theme');
     });
     const [projects, setProjects] = useState([]);
     const [projectsError, setProjectsError] = useState(false);
@@ -47,19 +47,16 @@ function App() {
     }, [projects]);
 
     useEffect(() => {
-        if (darkMode !== undefined) {
-            document.body.classList.toggle("dark", darkMode);
-            localStorage.setItem(SCHEME_KEY, JSON.stringify(darkMode));
-        } else {
-            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-            setDarkMode(mediaQuery.matches);
-        }
-    }, [darkMode]);
+        if (theme === undefined) return;
+
+        document.body.setAttribute("data-theme", theme);
+        localStorage.setItem(THEME_KEY, theme);
+    }, [theme]);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-        const handleChange = (e) => setDarkMode(e.matches);
+        const handleChange = (e) => setTheme(e.matches);
 
         mediaQuery.addEventListener('change', handleChange);
         return () => mediaQuery.removeEventListener('change', handleChange);
@@ -120,7 +117,7 @@ function App() {
 
     return (
         <>
-            <ThemeButton onClick={() => setDarkMode(prev => !prev)} />
+            <ThemeButton onClick={() => setTheme(theme === "dark" ? "light" : "dark")} />
             <Header
                 onHeaderClick={handleHeaderClick}
                 showContact={showContact}

@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="author" content="Simon Mckindley" />
   <meta name="description" content="Simon Mckindley's personal website" />
-  <meta name="keywords" content="Simon Mckindley, Simon, Mckindley, personal, website, software engineer, full stack, developer, coding" />
+  <meta name="keywords"
+    content="Simon Mckindley, Simon, Mckindley, personal, website, software engineer, full stack, developer, coding" />
   <title>Simon Mckindley</title>
 </head>
 
@@ -15,5 +16,17 @@
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
+
+<script>
+  const savedTheme = localStorage.getItem("portfolio-theme");
+
+  const theme = savedTheme === "light" || savedTheme === "dark"
+    ? savedTheme
+    : window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+
+  document.body.setAttribute("data-theme", theme);
+</script>
 
 </html>

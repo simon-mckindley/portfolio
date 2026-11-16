@@ -18,16 +18,16 @@ export default function Loading({ loadingText = "Loading", errorText = "Loading 
 
          {!error && (
             <>
-               <div class="spinner">
-                  <div class="inner"></div>
-                  <div class="inner"></div>
-                  <div class="inner"></div>
-                  <div class="inner"></div>
-                  <div class="inner"></div>
-                  <div class="inner"></div>
-                  <div class="inner"></div>
-                  <div class="inner"></div>
-                  <div class="inner"></div>
+               <div className="spinner">
+                  <div className="inner"></div>
+                  <div className="inner"></div>
+                  <div className="inner"></div>
+                  <div className="inner"></div>
+                  <div className="inner"></div>
+                  <div className="inner"></div>
+                  <div className="inner"></div>
+                  <div className="inner"></div>
+                  <div className="inner"></div>
                </div>
 
                <style>
