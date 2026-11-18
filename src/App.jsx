@@ -31,7 +31,8 @@ function App() {
     useEffect(() => {
         apiRequest({ projects: true })
             .then((data) => {
-                setProjects(data);
+                const filteredProjects = data.filter(project => !project.hide);
+                setProjects(filteredProjects);
             })
             .catch((error) => {
                 console.error("Error fetching projects:", error.message);
@@ -41,8 +42,10 @@ function App() {
 
     useEffect(() => {
         if (projects && projects.length > 0) {
-            const featured = projects.find(project => project.isFeatured);
-            setFeaturedProject(featured || null);
+            const featuredList = projects.filter(project => project.isFeatured);
+            const randomIndex = Math.floor(Math.random() * featuredList.length);
+            
+            setFeaturedProject(featuredList[randomIndex] || null);
         }
     }, [projects]);
 
