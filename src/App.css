@@ -149,6 +149,9 @@ header {
   }
 }
 
+[data-theme="dark"] header.sticky {
+  border-color: rgb(255, 255, 255, 0.2);
+}
 
 /* Headline */
 .headline {
@@ -280,11 +283,19 @@ header {
     flex-grow: 1;
 
     .contact-item {
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 0.5rem;
+      width: max-content;
+      border-radius: 8px;
+
       input {
         display: none;
       }
 
       label {
+        background-color: var(--color-card-2);
+        border-radius: 4px;
+        padding: 0.25rem 0.5rem;
         cursor: pointer;
         transition: text-shadow 300ms, color 300ms;
       }
@@ -437,7 +448,7 @@ header {
       .item-list {
         position: relative;
         background-color: rgba(255, 255, 255, 0.5);
-        padding: 0.5rem 0.5rem;
+        padding: 0.5rem;
         margin-inline: -0.5rem;
         border-radius: 8px;
 
