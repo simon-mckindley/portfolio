@@ -284,23 +284,29 @@ header {
 
     .contact-item {
       background-color: rgba(255, 255, 255, 0.5);
-      padding: 0.5rem 0.25rem;
-      width: max-content;
+      padding: 0.25rem;
+      max-width: 10ch;
       border-radius: 8px;
+      transition: max-width 1200ms;
 
       input {
         display: none;
       }
 
       label {
+        display: block;
         background-color: var(--color-card-2);
         border-radius: 4px;
+        margin-inline: auto;
         padding: 0.25rem 0.5rem;
+        text-align: center;
         cursor: pointer;
         transition: text-shadow 300ms, color 300ms;
       }
 
       &:has(input:checked) {
+        max-width: 35ch;
+
         label {
           text-decoration: underline;
         }
@@ -329,7 +335,7 @@ header {
 
       visibility: hidden;
       opacity: 0;
-      transition: opacity 300ms;
+      transition: opacity 1300ms 600ms;
 
       &.show {
         visibility: visible;
