@@ -3,27 +3,30 @@ import SkillsItem from "./SkillsItem";
 import Loading from './Loading.jsx';
 import apiRequest from "../api/apiRequest";
 
-export default function Skills({ onSkillClick, filters }) {
-    const includeList = [
-        "Programming Languages",
-        "Frameworks & Libraries",
-        "Front-End"
-    ];
+const includeList = [
+    "Programming Languages",
+    "Frameworks & Libraries",
+    "Front-End"
+];
+
+export default function Skills({ onSkillClick, filters, projectSkills }) {
     const [skillsList, setSkillsList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
     useEffect(() => {
+        if (!projectSkills || projectSkills.length === 0) return;
+
         apiRequest({ skills: true })
             .then((data) => {
-                setSkillsList(data);
+                setSkillsList(data.filter(skill => includeList.includes(skill.title)));
                 setLoading(false);
             })
             .catch((error) => {
                 console.error("Error fetching skills:", error.message);
                 setError(true);
             });
-    }, []);
+    }, [projectSkills]);
 
     return (
         <div className="bento-card skills-card">
@@ -36,16 +39,15 @@ export default function Skills({ onSkillClick, filters }) {
                 />
             ) : (
                 <ul className="skills-list">
-                    {skillsList
-                        .filter(skill => includeList.includes(skill.title))
-                        .map((skillItem, i) => (
-                            <SkillsItem
-                                key={i}
-                                skillItem={skillItem}
-                                onSkillClick={onSkillClick}
-                                filters={filters}
-                            />
-                        ))}
+                    {skillsList.map((skillItem, i) => (
+                        <SkillsItem
+                            key={i}
+                            skillItem={skillItem}
+                            onSkillClick={onSkillClick}
+                            filters={filters}
+                            projectSkills={projectSkills}
+                        />
+                    ))}
                 </ul>
             )}
         </div>

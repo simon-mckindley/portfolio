@@ -1,7 +1,7 @@
 import { useState, useEffect, useLayoutEffect, useRef, Fragment } from "react";
 import LeftIcon from '../assets/circle-chevron-left-solid-full.svg';
 
-export default function SkillsItem({ skillItem, onSkillClick, filters }) {
+export default function SkillsItem({ skillItem, onSkillClick, filters, projectSkills }) {
     const scrollContRef = useRef(null);
     const [isOverflow, setIsOverflow] = useState(undefined);
     const [isAtEnd, setIsAtEnd] = useState(false);
@@ -50,26 +50,28 @@ export default function SkillsItem({ skillItem, onSkillClick, filters }) {
             <div className="title">{skillItem.title}</div>
             <div className="item-list">
                 <div ref={scrollContRef} className={`scroll-container ${isOverflow ? "overflow" : ""}`}>
-                    {skillItem.skills.map((skill, i) => (
-                        <Fragment key={i}>
-                            <input
-                                type="checkbox"
-                                id={skill}
-                                name="skill-check"
-                                value={skill}
-                                checked={filters.includes(skill)}
-                                onClick={() => onSkillClick(skill)}
-                                onChange={() => { }}
-                            />
+                    {skillItem.skills
+                        .filter(skill => projectSkills.includes(skill))
+                        .map((skill, i) => (
+                            <Fragment key={i}>
+                                <input
+                                    type="checkbox"
+                                    id={skill}
+                                    name="skill-check"
+                                    value={skill}
+                                    checked={filters.includes(skill)}
+                                    onClick={() => onSkillClick(skill)}
+                                    onChange={() => { }}
+                                />
 
-                            <label
-                                htmlFor={skill}
-                                title="Click to filter projects"
-                            >
-                                {skill}
-                            </label>
-                        </Fragment>
-                    ))}
+                                <label
+                                    htmlFor={skill}
+                                    title="Click to filter projects"
+                                >
+                                    {skill}
+                                </label>
+                            </Fragment>
+                        ))}
 
                 </div>
 

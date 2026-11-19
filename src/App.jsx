@@ -21,6 +21,7 @@ function App() {
     const [projects, setProjects] = useState([]);
     const [projectsError, setProjectsError] = useState(false);
     const [featuredProject, setFeaturedProject] = useState(null);
+    const [projectSkills, setProjectSkills] = useState([]);
     const [filters, setFilters] = useState([]);
     const [showContact, setShowContact] = useState(false);
     const contactRef = useRef(null);
@@ -33,6 +34,7 @@ function App() {
             .then((data) => {
                 const filteredProjects = data.filter(project => !project.hide);
                 setProjects(filteredProjects);
+                setProjectSkills([...new Set(filteredProjects.flatMap(project => project.technologies || []))]);
             })
             .catch((error) => {
                 console.error("Error fetching projects:", error.message);
@@ -44,7 +46,7 @@ function App() {
         if (projects && projects.length > 0) {
             const featuredList = projects.filter(project => project.isFeatured);
             const randomIndex = Math.floor(Math.random() * featuredList.length);
-            
+
             setFeaturedProject(featuredList[randomIndex] || null);
         }
     }, [projects]);
@@ -166,6 +168,7 @@ function App() {
                         <Skills
                             onSkillClick={handleSkillClick}
                             filters={filters}
+                            projectSkills={projectSkills}
                         />
                     </div>
 
