@@ -6,14 +6,14 @@ const CONTACT_DATA = [
     { name: 'github', label: 'GitHub', href: 'https://github.com/simon-mckindley', link: 'github.com/simon-mckindley', blank: true },
 ];
 
-export default function Contact({moving}) {
-    const [selectedValue, setSelectedValue] = useState("");
+export default function Contact({ moving }: { moving: boolean }) {
+    const [selectedValue, setSelectedValue] = useState<string>("");
 
     useEffect(() => {
         if (moving) setSelectedValue("");
     }, [moving]);
 
-    const handleRadioClick = (value) => {
+    const handleRadioClick = (value: string) => {
         setSelectedValue(selectedValue === value ? "" : value);
     };
 

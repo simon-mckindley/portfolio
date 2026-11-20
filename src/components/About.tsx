@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-export default function About({ moving }) {
-    const [isOpen, setIsOpen] = useState(false);
+export default function About({ moving }: { moving: boolean }) {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     useEffect(() => {
         if (moving) setIsOpen(false);

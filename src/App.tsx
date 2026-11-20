@@ -14,8 +14,8 @@ import apiRequest from './api/apiRequest'
 import { Project } from './types/dataTypes'
 
 type Coords = {
-    x: Number;
-    y: Number;
+    x: number;
+    y: number;
 }
 
 const THEME_KEY = "portfolio-theme";
@@ -31,10 +31,10 @@ function App() {
     const [projectSkills, setProjectSkills] = useState<string[]>([]);
     const [filters, setFilters] = useState<string[]>([]);
     const [showContact, setShowContact] = useState<boolean>(false);
-    const contactRef = useRef<HTMLElement | null>(null);
+    const contactRef = useRef<HTMLButtonElement | null>(null);
     const [contactMoving, setContactMoving] = useState<boolean>(false);
     const [showAbout, setShowAbout] = useState<boolean>(false);
-    const aboutRef = useRef<HTMLElement | null>(null);
+    const aboutRef = useRef<HTMLButtonElement | null>(null);
     const [aboutMoving, setAboutMoving] = useState<boolean>(false);
     const [buttonCoords, setButtonCoords] = useState<Coords>({ x: 0, y: 0 });
 

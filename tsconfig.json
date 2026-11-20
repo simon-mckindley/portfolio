@@ -21,5 +21,14 @@
     },
     "include": [
         "src"
+    ],
+    "exclude": [
+        "src/components/About.jsx",
+        "src/components/Contact.jsx",
+        "src/components/ProjectCard.jsx",
+        "src/components/Projects.jsx",
+        "src/components/TranslateCard.jsx",
+        "src/components/ThemeButton.jsx",
+        "src/components/Skills.jsx",
     ]
 }

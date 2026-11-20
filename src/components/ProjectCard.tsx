@@ -1,7 +1,16 @@
-import Loading from './Loading.jsx';
+import Loading from './Loading';
 import LinkIcon from '../assets/arrow-up-right-from-square-solid-full.svg';
+import { Project } from '../types/dataTypes'
 
-export default function ProjectCard({ heading = "Project", isFeature = false, error = false, project, show }) {
+interface ProjectProps {
+    heading?: string;
+    isFeature?: boolean;
+    error?: boolean;
+    project?: Project | null;
+    show?: boolean
+}
+
+export default function ProjectCard({ heading = "Project", isFeature = false, error = false, project, show }: ProjectProps) {
     if (!project) {
         return (
             <div className={`bento-card project-card ${isFeature ? "feature" : ""} ${show ? "fade-in" : ""}`}>

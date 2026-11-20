@@ -1,11 +1,19 @@
 import { useState, useEffect, useLayoutEffect, useRef, Fragment } from "react";
 import LeftIcon from '../assets/circle-chevron-left-solid-full.svg';
+import { SkillsGroup } from '../types/dataTypes'
 
-export default function SkillsItem({ skillItem, onSkillClick, filters, projectSkills }) {
-    const scrollContRef = useRef(null);
-    const [isOverflow, setIsOverflow] = useState(undefined);
-    const [isAtEnd, setIsAtEnd] = useState(false);
-    const [isAtStart, setIsAtStart] = useState(true);
+interface SkillsListProps {
+    skillsGroup: SkillsGroup;
+    onSkillClick: (skill: string) => void;
+    filters: string[];
+    projectSkills: string[];
+}
+
+export default function SkillsList({ skillsGroup, onSkillClick, filters, projectSkills }: SkillsListProps) {
+    const scrollContRef = useRef<HTMLDivElement | null>(null);
+    const [isOverflow, setIsOverflow] = useState<boolean | undefined>(undefined);
+    const [isAtEnd, setIsAtEnd] = useState<boolean>(false);
+    const [isAtStart, setIsAtStart] = useState<boolean>(true);
 
     useLayoutEffect(() => {
         const { current } = scrollContRef;
@@ -35,7 +43,7 @@ export default function SkillsItem({ skillItem, onSkillClick, filters, projectSk
         return () => current.removeEventListener('scrollend', handleScrollEnd);
     }, []);
 
-    const handleScrollClick = (isLeft) => {
+    const handleScrollClick = (isLeft: boolean) => {
         const { current } = scrollContRef;
         if (!current) return;
 
@@ -47,10 +55,10 @@ export default function SkillsItem({ skillItem, onSkillClick, filters, projectSk
 
     return (
         <li className="skill-item">
-            <div className="title">{skillItem.title}</div>
+            <div className="title">{skillsGroup.title}</div>
             <div className="item-list">
                 <div ref={scrollContRef} className={`scroll-container ${isOverflow ? "overflow" : ""}`}>
-                    {skillItem.skills
+                    {skillsGroup.skills
                         .filter(skill => projectSkills.includes(skill))
                         .map((skill, i) => (
                             <Fragment key={i}>

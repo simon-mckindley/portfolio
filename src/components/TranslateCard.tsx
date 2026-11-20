@@ -1,19 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 
-export default function TranslateCard({
-    content,
-    contentClass,
-    show,
-    buttonX,
-    buttonY
-}) {
-    const containerRef = useRef(null);
+interface TranslateCardProps {
+    content: ReactNode;
+    contentClass: string;
+    show: boolean;
+    buttonX: number;
+    buttonY: number;
+}
+
+export default function TranslateCard({ content, contentClass, show, buttonX, buttonY }: TranslateCardProps) {
+    const containerRef = useRef<HTMLDivElement | null>(null);
     const [translateX, setTranslateX] = useState(0);
     const [translateY, setTranslateY] = useState(0);
 
     useEffect(() => {
         const getContainerPosition = () => {
-            const rect = containerRef?.current.getBoundingClientRect();
+            const rect = containerRef?.current?.getBoundingClientRect();
             return rect ? { x: rect.x, y: rect.y } : null;
         }
 
@@ -34,7 +36,7 @@ export default function TranslateCard({
         <div
             ref={containerRef}
             className={`bento-card translate-card ${contentClass} ${show ? "show" : ""}`}
-            style={{ "--_translateX": `${translateX}px`, "--_translateY": `${translateY}px` }}
+            style={{ "--_translateX": `${translateX}px`, "--_translateY": `${translateY}px` } as CSSProperties}
         >
             {content}
         </div>
