@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function Contact() {
-    const contactData = [
-        { name: 'email', label: 'Email', href: 'mailto:simonmckindley@gmail.com', link: 'simonmckindley@gmail.com', blank: false },
-        { name: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/simon-mckindley/', link: 'linkedin.com/in/simon-mckindley', blank: true },
-        { name: 'github', label: 'GitHub', href: 'https://github.com/simon-mckindley', link: 'github.com/simon-mckindley', blank: true },
-    ];
+const CONTACT_DATA = [
+    { name: 'email', label: 'Email', href: 'mailto:simonmckindley@gmail.com', link: 'simonmckindley@gmail.com', blank: false },
+    { name: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/simon-mckindley/', link: 'linkedin.com/in/simon-mckindley', blank: true },
+    { name: 'github', label: 'GitHub', href: 'https://github.com/simon-mckindley', link: 'github.com/simon-mckindley', blank: true },
+];
 
+export default function Contact(select = "") {
     const [selectedValue, setSelectedValue] = useState("");
+
+    useEffect(() => {
+        setSelectedValue(select);
+    }, [select]);
 
     const handleRadioClick = (value) => {
         setSelectedValue(selectedValue === value ? "" : value);
@@ -17,7 +21,7 @@ export default function Contact() {
         <>
             <h3 className="card-heading">Contact me</h3>
             <ul className="contact-list">
-                {contactData.map((contact, i) => (
+                {CONTACT_DATA.map((contact, i) => (
                     <li key={i} className="contact-item">
                         <input
                             type="radio"
@@ -35,7 +39,7 @@ export default function Contact() {
             </ul>
 
             <div className="link-container">
-                {contactData.map((contact, i) => (
+                {CONTACT_DATA.map((contact, i) => (
                     <a
                         key={i}
                         className={`contact-address ${selectedValue === contact.name ? "show" : ""}`}

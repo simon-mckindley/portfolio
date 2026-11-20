@@ -3,7 +3,7 @@ import SkillsItem from "./SkillsItem";
 import Loading from './Loading.jsx';
 import apiRequest from "../api/apiRequest";
 
-const includeList = [
+const INCLUDE_LIST = [
     "Programming Languages",
     "Frameworks & Libraries",
     "Front-End"
@@ -19,7 +19,7 @@ export default function Skills({ onSkillClick, filters, projectSkills }) {
 
         apiRequest({ skills: true })
             .then((data) => {
-                setSkillsList(data.filter(skill => includeList.includes(skill.title)));
+                setSkillsList(data.filter(skill => INCLUDE_LIST.includes(skill.title)));
                 setLoading(false);
             })
             .catch((error) => {

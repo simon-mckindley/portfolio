@@ -105,7 +105,6 @@ function App() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Function to toggle a filter
     const handleSkillClick = (skill) => {
         setFilters((prevFilters) => {
             if (prevFilters.includes(skill)) {
@@ -146,7 +145,7 @@ function App() {
 
                     <div id="about">
                         <TranslateCard
-                            content={<About closed />}
+                            content={<About />}
                             contentClass={'about-card'}
                             show={showAbout}
                             buttonX={buttonCoords.x}
