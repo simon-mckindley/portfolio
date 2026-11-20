@@ -11,28 +11,37 @@ import ProjectCard from "./components/ProjectCard"
 import Skills from './components/Skills'
 import ThemeButton from './components/ThemeButton'
 import apiRequest from './api/apiRequest'
+import { Project } from './types/dataTypes'
+
+type Coords = {
+    x: Number;
+    y: Number;
+}
 
 const THEME_KEY = "portfolio-theme";
 
 function App() {
-    const [theme, setTheme] = useState(() => {
-        return document.body.getAttribute('data-theme');
+    const [theme, setTheme] = useState<"light" | "dark" | null>(() => {
+        const dataTheme = document.body.getAttribute('data-theme');
+        return dataTheme === "light" ? "light" : dataTheme === "dark" ? "dark" : null;
     });
-    const [projects, setProjects] = useState([]);
-    const [projectsError, setProjectsError] = useState(false);
-    const [featuredProject, setFeaturedProject] = useState(null);
-    const [projectSkills, setProjectSkills] = useState([]);
-    const [filters, setFilters] = useState([]);
-    const [showContact, setShowContact] = useState(false);
-    const contactRef = useRef(null);
-    const [showAbout, setShowAbout] = useState(false);
-    const aboutRef = useRef(null);
-    const [buttonCoords, setButtonCoords] = useState({ x: 0, y: 0 })
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [projectsError, setProjectsError] = useState<boolean>(false);
+    const [featuredProject, setFeaturedProject] = useState<Project | null>(null);
+    const [projectSkills, setProjectSkills] = useState<string[]>([]);
+    const [filters, setFilters] = useState<string[]>([]);
+    const [showContact, setShowContact] = useState<boolean>(false);
+    const contactRef = useRef<HTMLElement | null>(null);
+    const [contactMoving, setContactMoving] = useState<boolean>(false);
+    const [showAbout, setShowAbout] = useState<boolean>(false);
+    const aboutRef = useRef<HTMLElement | null>(null);
+    const [aboutMoving, setAboutMoving] = useState<boolean>(false);
+    const [buttonCoords, setButtonCoords] = useState<Coords>({ x: 0, y: 0 });
 
     useEffect(() => {
         apiRequest({ projects: true })
             .then((data) => {
-                const filteredProjects = data.filter(project => !project.hide);
+                const filteredProjects = (data as Project[]).filter(project => !project.hide);
                 setProjects(filteredProjects);
                 setProjectSkills([...new Set(filteredProjects.flatMap(project => project.technologies || []))]);
             })
@@ -52,7 +61,7 @@ function App() {
     }, [projects]);
 
     useEffect(() => {
-        if (theme === undefined) return;
+        if (theme === null) return;
 
         document.body.setAttribute("data-theme", theme);
         localStorage.setItem(THEME_KEY, theme);
@@ -61,13 +70,13 @@ function App() {
     useEffect(() => {
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-        const handleChange = (e) => setTheme(e.matches);
+        const handleChange = (e: MediaQueryListEvent) => setTheme(e.matches ? "dark" : "light");
 
         mediaQuery.addEventListener('change', handleChange);
         return () => mediaQuery.removeEventListener('change', handleChange);
     }, []);
 
-    const handleHeaderClick = (event) => {
+    const handleHeaderClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         const rect = event.currentTarget.getBoundingClientRect();
         setButtonCoords({ x: rect.left, y: rect.bottom });
 
@@ -83,17 +92,30 @@ function App() {
     };
 
     useLayoutEffect(() => {
-        if (!showContact || !contactRef.current) return;
+        setContactMoving(true);
+        const timeOut = setTimeout(() => {
+            setContactMoving(false);
+        }, 300);
+
+        if (!showContact || !contactRef.current) return (() => { clearTimeout(timeOut) });
 
         const rect = contactRef.current.getBoundingClientRect();
         setButtonCoords({ x: rect.left, y: rect.bottom });
+        setContactMoving(true);
+        return (() => { clearTimeout(timeOut) });
     }, [showContact]);
 
     useLayoutEffect(() => {
-        if (!showAbout || !aboutRef.current) return;
+        setAboutMoving(true);
+        const timeOut = setTimeout(() => {
+            setAboutMoving(false);
+        }, 300);
+
+        if (!showAbout || !aboutRef.current) return (() => { clearTimeout(timeOut) });
 
         const rect = aboutRef.current.getBoundingClientRect();
         setButtonCoords({ x: rect.left, y: rect.bottom });
+        return (() => { clearTimeout(timeOut) });
     }, [showAbout]);
 
     useEffect(() => {
@@ -105,12 +127,12 @@ function App() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const handleSkillClick = (skill) => {
+    const handleSkillClick = (skill: string) => {
         setFilters((prevFilters) => {
             if (prevFilters.includes(skill)) {
-                return prevFilters.filter((filter) => filter !== skill); // Remove filter
+                return prevFilters.filter((filter) => filter !== skill);
             } else {
-                return [...prevFilters, skill]; // Add new filter
+                return [...prevFilters, skill];
             }
         });
     };
@@ -140,12 +162,15 @@ function App() {
                             isFeature={true}
                             error={projectsError}
                             project={featuredProject}
+                            show={true}
                         />
                     </div>
 
                     <div id="about">
                         <TranslateCard
-                            content={<About />}
+                            content={
+                                <About moving={aboutMoving} />
+                            }
                             contentClass={'about-card'}
                             show={showAbout}
                             buttonX={buttonCoords.x}
@@ -155,7 +180,9 @@ function App() {
 
                     <div id="contact">
                         <TranslateCard
-                            content={<Contact />}
+                            content={
+                                <Contact moving={contactMoving} />
+                            }
                             contentClass={'contact-card'}
                             show={showContact}
                             buttonX={buttonCoords.x}

@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 
-export default function About(closed = true) {
-    const [isClosed, setIsClosed] = useState(true);
+export default function About({ moving }) {
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        setIsClosed(closed);
-    }, [closed]);
+        if (moving) setIsOpen(false);
+    }, [moving]);
 
     const handleReadMore = () => {
-        setIsClosed(prev => !prev);
+        setIsOpen(prev => !prev);
     };
 
     return (
         <>
-            <div className={`text-outer ${isClosed ? "" : "open"}`}>
+            <div className={`text-outer ${isOpen ? "open" : ""}`}>
                 <h3 className="card-heading">About</h3>
 
                 <div className="text">
