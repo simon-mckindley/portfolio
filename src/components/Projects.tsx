@@ -97,14 +97,20 @@ export default function ProjectList({ projects, error, filters, onClearFilters }
                 )}
             </div>
             <div className={`projects-grid`}>
-                {filteredProjects.map((project) => (
-                    <ProjectCard key={project._id} project={project} show={showProjects} />
-                ))}
-
                 {filteredProjects.length === 0 && (
                     <div className="no-projects">
                         <p>No projects match the selected filters.</p>
                     </div>
+                )}
+
+                {filteredProjects.length > 0 && (
+                    Array.from({
+                        length: Math.max(4, filteredProjects.length)
+                    }).map((_, i) => (
+                        i < filteredProjects.length
+                            ? <ProjectCard key={filteredProjects[i]._id} project={filteredProjects[i]} show={showProjects} />
+                            : <div key={`placeholder-${i}`} data-placeholder ></div>
+                    ))
                 )}
             </div>
         </section>
