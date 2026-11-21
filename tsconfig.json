@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "useDefineForClassFields": true,
+        "lib": [
+            "ES2022",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "module": "ESNext",
+        "skipLibCheck": true,
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "isolatedModules": true,
+        "moduleDetection": "force",
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "allowJs": true,
+        "checkJs": false,
+        "strict": true
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "src/components/About.jsx",
+        "src/components/Contact.jsx",
+        "src/components/ProjectCard.jsx",
+        "src/components/Projects.jsx",
+        "src/components/TranslateCard.jsx",
+        "src/components/ThemeButton.jsx",
+        "src/components/Skills.jsx",
+    ]
+}

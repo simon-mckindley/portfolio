@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
-import Loading from './Loading.jsx';
+import Loading from './Loading';
+import { Project } from '../types/dataTypes'
 
-export default function ProjectList({ projects, error, filters, onClearFilters }) {
-    const [loading, setLoading] = useState(true);
-    const [filteredProjects, setFilteredProjects] = useState([]);
-    const [showProjects, setShowProjects] = useState(true); // Animation control
+interface ProjectListProps {
+    projects: Project[];
+    error?: boolean;
+    filters: string[];
+    onClearFilters: () => void;
+}
+
+export default function ProjectList({ projects, error, filters, onClearFilters }: ProjectListProps) {
+    const [loading, setLoading] = useState<boolean>(true);
+    const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
+    const [showProjects, setShowProjects] = useState<boolean>(true); // Animation control
 
     useEffect(() => {
         if (projects && projects.length > 0) {

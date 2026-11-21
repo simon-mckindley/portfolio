@@ -1,5 +1,5 @@
 
-export default function ThemeButton({ onClick }) {
+export default function ThemeButton({ onClick }: { onClick: () => void }) {
     return (
         <button
             type="button"

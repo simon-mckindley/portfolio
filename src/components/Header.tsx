@@ -1,7 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type RefObject } from "react";
 
-export default function Header({ onHeaderClick, showContact, showAbout, contactRef, aboutRef }) {
-    const [scrollPosition, setScrollPosition] = useState(0);
+interface HeaderProps {
+    onHeaderClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    showContact: boolean;
+    showAbout: boolean;
+    contactRef: RefObject<HTMLButtonElement | null>;
+    aboutRef: RefObject<HTMLButtonElement | null>;
+}
+
+export default function Header({ onHeaderClick, showContact, showAbout, contactRef, aboutRef }: HeaderProps) {
+    const [scrollPosition, setScrollPosition] = useState<number>(0);
 
     useEffect(() => {
         const handleScroll = () => setScrollPosition(window.scrollY);

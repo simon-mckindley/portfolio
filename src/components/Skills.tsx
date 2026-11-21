@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
-import SkillsItem from "./SkillsItem";
-import Loading from './Loading.jsx';
+import SkillsList from "./SkillsList";
+import Loading from './Loading';
 import apiRequest from "../api/apiRequest";
+import { SkillsGroup } from '../types/dataTypes'
+
+interface SkillsProps {
+    onSkillClick: (skill: string) => void;
+    filters: string[];
+    projectSkills: string[];
+}
 
 const INCLUDE_LIST = [
     "Programming Languages",
@@ -9,17 +16,17 @@ const INCLUDE_LIST = [
     "Front-End"
 ];
 
-export default function Skills({ onSkillClick, filters, projectSkills }) {
-    const [skillsList, setSkillsList] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+export default function Skills({ onSkillClick, filters, projectSkills }: SkillsProps) {
+    const [skillsList, setSkillsList] = useState<SkillsGroup[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<boolean>(false);
 
     useEffect(() => {
         if (!projectSkills || projectSkills.length === 0) return;
 
         apiRequest({ skills: true })
             .then((data) => {
-                setSkillsList(data.filter(skill => INCLUDE_LIST.includes(skill.title)));
+                setSkillsList((data as SkillsGroup[]).filter(skill => INCLUDE_LIST.includes(skill.title)));
                 setLoading(false);
             })
             .catch((error) => {
@@ -39,10 +46,10 @@ export default function Skills({ onSkillClick, filters, projectSkills }) {
                 />
             ) : (
                 <ul className="skills-list">
-                    {skillsList.map((skillItem, i) => (
-                        <SkillsItem
+                    {skillsList.map((skillsGroup, i) => (
+                        <SkillsList
                             key={i}
-                            skillItem={skillItem}
+                            skillsGroup={skillsGroup}
                             onSkillClick={onSkillClick}
                             filters={filters}
                             projectSkills={projectSkills}
